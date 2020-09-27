@@ -1,0 +1,21 @@
+{
+    "products": {
+      "keeb1": {
+        "name": "Ada Lovelace",
+        "imgurl": { "ghopper": true }
+      },
+      "keeb2": {
+
+      },
+      "keeb3": {
+
+      }
+    },
+
+    "inventory": {
+        "name":
+    }
+
+
+
+}

@@ -8,6 +8,24 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
+/* colours */
+/* 
+
+Rich Black FOGRA 29: 00171F
+Prussian Blue: 003459
+CG Blue: 007EA7
+Carolina Blue:  00A8E8
+
+*/
+
+/* variables */
+:root {
+  --rich-black: #00171F;
+  --prussian-blue: #003459;
+  --cg-blue: #007EA7;
+  --carolina-blue: #00A8E8;
+}
+
 
 .wrapper {
   max-width: 1400px;

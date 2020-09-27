@@ -72,3 +72,13 @@ a {
 .nav-bar__cart-icon {
   width: 30%;
 }
+
+
+.header-background {
+  background-image: url('http://matthopecodes.com/project-five-assets/alice-layout.jpg');
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center;
+  height: 70vh;
+  padding-top: 400px;
+}

@@ -13,7 +13,6 @@ class App extends Component {
     }
   }
 
-
   componentDidMount() {
     // variable that holds a reference to our database
 
@@ -27,7 +26,9 @@ class App extends Component {
         <div className="App">
           {/* components list */}
           <Header/>
-
+          <div class="header-background">
+            <button>Enter store</button>
+          </div> 
 
 
           <Footer/>

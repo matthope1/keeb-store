@@ -1,21 +1,38 @@
 {
     "products": {
       "keeb1": {
-        "name": "Ada Lovelace",
-        "imgurl": { "ghopper": true }
+        "price": 23,
+        "type": "kb",
+        "url": "someurl"
       },
       "keeb2": {
-
+        "price": 324,
+        "type": "kb",
+        "url": "someurl"
       },
       "keeb3": {
-
+        "price": 324,
+        "type": "kb",
+        "url": "someurl"
       }
     },
 
     "inventory": {
-        "name":
+        "keeb1": {
+            "quantity": 0
+        }
+    },
+
+    "cart" : {
+        "keeb1": {
+            "price": 23,
+            "type": "kb",
+            "url": "someurl"
+        },
+        "keeb2": {
+            "price": 324,
+            "type": "kb",
+            "url": "someurl"
+        }
     }
-
-
-
 }

@@ -13,7 +13,10 @@ class App extends Component {
 
   componentDidMount() {
     // variable that holds a reference to our database
-    const dbRef = firebase.database().ref();
+
+    //TODO:
+    // const dbRef = firebase.database().ref();
+
   }
 
   render (){

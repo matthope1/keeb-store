@@ -16,5 +16,3 @@ firebase.initializeApp(config);
 
 // this exports the CONFIGURED version of firebase
 export default firebase;
-// this exports the CONFIGURED version of firebase
-export default firebase;

@@ -43,22 +43,30 @@ Carolina Blue:  00A8E8
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 .logo {
-
+  width: 20%;
 }
 
 .nav-bar {
   display: flex;
+  align-items: center;
 }
 
 .nav-bar__links {
     width: 70%;
+}
+
+.nav-bar__links li {
+  display: inline-block;
+  margin-left: 10px;
 }
 
 .nav-bar__cart-icon {

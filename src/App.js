@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import firebase from './firebase';
 import './App.css';
 
-import Header from './Header'
+import Header from './Header';
+import Footer from './Footer';
 
 class App extends Component {
   constructor() {
@@ -26,6 +27,10 @@ class App extends Component {
         <div className="App">
           {/* components list */}
           <Header/>
+
+
+
+          <Footer/>
         </div>
       );
   }

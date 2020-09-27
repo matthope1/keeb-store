@@ -5,12 +5,13 @@ import 'firebase/database';
 // Initialize Firebase
 // *** USE YOUR CONFIG OBJECT ***
 const config = {
-	apiKey: "YOUR-API-KET",
-	authDomain: "bookshelf-8d68a.firebaseapp.com",
-	databaseURL: "https://bookshelf-8d68a.firebaseio.com",
-	projectId: "bookshelf-8d68a",
-	storageBucket: "bookshelf-8d68a.appspot.com",
-	messagingSenderId: "548100999451"
+	apiKey: "AIzaSyArVo9OLXwaGHvGmxGCMP-7nT6DiBBaX5k",
+    authDomain: "keeb-store.firebaseapp.com",
+    databaseURL: "https://keeb-store.firebaseio.com",
+    projectId: "keeb-store",
+    storageBucket: "keeb-store.appspot.com",
+    messagingSenderId: "560632301677",
+    appId: "1:560632301677:web:5f678f2f834f974e1d5764"	
 };
 firebase.initializeApp(config);
 

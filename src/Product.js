@@ -10,7 +10,12 @@ class Product extends Component {
         return (
             <div className="product" >
                 <h1>{ name} { price } </h1>    
-                <img class="img" src={url} alt=""/>
+                <img className="img" src={url} alt=""/>
+                <button>Add to cart</button>
+                {/* TODO: add an add to cart button 
+                    bind it to a function that will
+                    update the cart state with the new product
+                 */}
             </div>
         )
     }

@@ -10,12 +10,14 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 /* colours */
 /* 
-
 Rich Black FOGRA 29: 00171F
 Prussian Blue: 003459
 CG Blue: 007EA7
 Carolina Blue:  00A8E8
 
+fonts 
+
+font-family: 'Space Mono', monospace;
 */
 
 /* variables */
@@ -25,7 +27,6 @@ Carolina Blue:  00A8E8
   --cg-blue: #007EA7;
   --carolina-blue: #00A8E8;
 }
-
 
 .wrapper {
   max-width: 1400px;
@@ -38,6 +39,9 @@ Carolina Blue:  00A8E8
   height: auto;
 }
 
+body {
+  font-family: 'Space Mono', monospace;
+}
 
 /* strip styles on list elements */
 ul {
@@ -81,7 +85,6 @@ a {
   height: 70vh;
   padding-top: 400px;
 }
-
 
 .products-flex {
   display: flex;

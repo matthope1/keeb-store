@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cart from './Cart';
 
 class Header extends Component {
     render() {
@@ -14,12 +15,8 @@ class Header extends Component {
                             <li><a href="">Store</a></li>
                             <li><a href="">Contact</a></li>
                         </ul>
-                        <div className="nav-bar__cart-icon wrapper">
-                            <a href="">
-                                <i className="fas fa-shopping-cart"></i> 
-                            </a>
-                        </div>
-                    </div>
+                        <Cart/>
+                   </div>
                 </nav>
             </div>
         )

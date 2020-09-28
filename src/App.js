@@ -53,16 +53,15 @@ class App extends Component {
   render (){
     return (
       <div className="App">
-        {/* components list */}
         <Header/>
         <div className="header-background">
           <button>Enter store</button>
         </div> 
 
         <div className="products-flex wrapper">
-          {this.state.products.map((product, index) => {
+          {this.state.products.map((product) => {
             return (
-              <Product name={product[0]} productInfo={product[1]} key={index} />
+              <Product key={product[0]} name={product[0]} productInfo={product[1]} />
             )
           })}
         </div>

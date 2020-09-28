@@ -6,8 +6,8 @@ class Header extends Component {
             <div>
                 <nav>
                     <div className="nav-bar wrapper">
-                        <div class="logo">
-                            <img class="img" src="http://matthopecodes.com/project-five-assets/keebStoreLogo.png" alt="logo"/>
+                        <div className="logo">
+                            <img className="img" src="http://matthopecodes.com/project-five-assets/keebStoreLogo.png" alt="logo"/>
                         </div>
                         <ul className="nav-bar__links">
                             <li><a href="">Home</a></li>
@@ -16,7 +16,7 @@ class Header extends Component {
                         </ul>
                         <div className="nav-bar__cart-icon wrapper">
                             <a href="">
-                                <i class="fas fa-shopping-cart"></i> 
+                                <i className="fas fa-shopping-cart"></i> 
                             </a>
                         </div>
                     </div>

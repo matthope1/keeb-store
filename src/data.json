@@ -105,6 +105,11 @@
     },
 
     "cart" : {
-        
+        "womier": {
+            "price": 80,
+            "type": "kb",
+            "url": "http://matthopecodes.com/project-five-assets/womier.jpg"
+        }
     }
+
 }

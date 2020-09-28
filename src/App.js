@@ -4,11 +4,16 @@ import './App.css';
 
 import Header from './Header';
 import Footer from './Footer';
+import Product from './Product';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+
+      // each element of products is an array with 2 indexes
+      // the first index being the name the products
+      // the second index being the information on the product
       products: [],
       cart: [],
     }
@@ -22,30 +27,24 @@ class App extends Component {
     // add an event listenter that will fire every time there
     // is a change in the db
 
+    let productList = [];
+    let cartList = [];
+
     // this event listener takes a callback function which we will user to get our data
     // from the databse and call that data 'response'
 
-    let productsData = [];
-    let cartData = [];
-    //TODO: parse the db query so that you get a list of product objects
     dbRef.on('value', (response) => {
 
-      let productObjects = response.val().products;        
-      //TODO: needs your love an attention
-      productsData =  Object.entries(productObjects).forEach(product => {
-        console.log(product, productObjects[product]);
-      })
-    
-      console.log("done...");
-      productsData.push(response.val().products);
-      cartData.push(response.val().cart);
+      // entries returns an array of antry
+      // entry[0] is the key, entry[1] is the value
 
-      // console.log(productsData);
-      // console.log(cartData);
+      productList =  Object.entries(response.val().products);
+      cartList = Object.entries(response.val().cart);
 
+      // console.log(productList);
       this.setState({
-        products: productsData,
-        cart: cartData
+        products: productList,
+        cart: cartList
       })
     });
 
@@ -59,6 +58,18 @@ class App extends Component {
         <div className="header-background">
           <button>Enter store</button>
         </div> 
+
+        {/* map over the products and display each products
+         by passing through the product name price type url etc as props
+         TODO:: create product component
+        */}
+
+        {this.state.products.map((product) => {
+          
+          return (
+            <Product name={product[0]}  />
+          )
+        })}
 
         <Footer/>
       </div>

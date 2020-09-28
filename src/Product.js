@@ -8,10 +8,9 @@ class Product extends Component {
         const { price, type, url } = this.props.productInfo;
 
         return (
-            <div>
+            <div className="product" >
                 <h1>{ name} { price } </h1>    
-                <img src={url} alt=""/>
-                {/* <h2>{ price } </h2> */}
+                <img class="img" src={url} alt=""/>
             </div>
         )
     }

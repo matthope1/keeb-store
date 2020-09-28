@@ -59,17 +59,13 @@ class App extends Component {
           <button>Enter store</button>
         </div> 
 
-        {/* map over the products and display each products
-         by passing through the product name price type url etc as props
-         TODO:: create product component
-        */}
-
-        {this.state.products.map((product, index) => {
-          
-          return (
-            <Product name={product[0]} productInfo={product[1]} key={index} />
-          )
-        })}
+        <div className="products-flex wrapper">
+          {this.state.products.map((product, index) => {
+            return (
+              <Product name={product[0]} productInfo={product[1]} key={index} />
+            )
+          })}
+        </div>
 
         <Footer/>
       </div>

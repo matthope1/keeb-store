@@ -34,7 +34,7 @@ Carolina Blue:  00A8E8
 }
 
 .img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
 }
 
@@ -81,3 +81,16 @@ a {
   height: 70vh;
   padding-top: 400px;
 }
+
+
+.products-flex {
+  display: flex;
+  flex-wrap: wrap;
+  /* max-width: 1400px; */
+}
+
+.product {
+  width: calc(100% / 3);
+}
+
+

@@ -64,10 +64,10 @@ class App extends Component {
          TODO:: create product component
         */}
 
-        {this.state.products.map((product) => {
+        {this.state.products.map((product, index) => {
           
           return (
-            <Product name={product[0]}  />
+            <Product name={product[0]} productInfo={product[1]} key={index} />
           )
         })}
 

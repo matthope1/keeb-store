@@ -41,19 +41,18 @@ class App extends Component {
       productList =  Object.entries(response.val().products);
       cartList = Object.entries(response.val().cart);
 
-      // console.log(productList);
+      // console.log(cartList);
       this.setState({
         products: productList,
         cart: cartList
       })
     });
-
   }
 
   render (){
     return (
       <div className="App">
-        <Header/>
+        <Header cartList={this.state.cart} />
         <div className="header-background">
           <button>Enter store</button>
         </div> 

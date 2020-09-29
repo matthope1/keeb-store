@@ -49,18 +49,31 @@ class App extends Component {
     });
   }
 
+  addToCart = (event, stuff) => {
+    const dbRef = firebase.database().ref();
+
+    console.log("FINNA ADD TO THE CART");
+    console.log(event);
+  }
+
+  handleClick = (event) => {
+    event.preventDefault();
+
+    console.log("I was clicked!!!");
+  }
+
   render (){
     return (
       <div className="App">
         <Header cartList={this.state.cart} />
         <div className="header-background">
-          <button>Enter store</button>
+          <button onClick={this.handleClick}>Enter store</button>
         </div> 
 
         <div className="products-flex wrapper">
           {this.state.products.map((product) => {
             return (
-              <Product key={product[0]} name={product[0]} productInfo={product[1]} />
+              <Product addToCart={() => this.addToCart(product)} key={product[0]} name={product[0]} productInfo={product[1]} />
             )
           })}
         </div>

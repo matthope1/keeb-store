@@ -89,7 +89,6 @@ a {
 .products-flex {
   display: flex;
   flex-wrap: wrap;
-  /* max-width: 1400px; */
 }
 
 .product {
@@ -97,3 +96,16 @@ a {
 }
 
 
+/* media queries */
+
+/* Portrait tablet and small desktops */
+@media (max-width: 940px) {
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 768px) {
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+}

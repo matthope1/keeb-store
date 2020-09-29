@@ -41,7 +41,6 @@ class App extends Component {
       productList =  Object.entries(response.val().products);
       cartList = Object.entries(response.val().cart);
 
-      // console.log(cartList);
       this.setState({
         products: productList,
         cart: cartList
@@ -49,17 +48,23 @@ class App extends Component {
     });
   }
 
-  addToCart = (event, stuff) => {
+  addToCart = (product) => {
     const dbRef = firebase.database().ref();
 
-    console.log("FINNA ADD TO THE CART");
-    console.log(event);
+    let updatedCartList = this.state.cart;
+
+    updatedCartList.push(product);
+
+    this.setState( {
+      cart: updatedCartList
+    })
+
   }
 
   handleClick = (event) => {
     event.preventDefault();
 
-    console.log("I was clicked!!!");
+    console.log("handleClick function called");
   }
 
   render (){

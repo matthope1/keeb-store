@@ -30,8 +30,12 @@ class App extends Component {
     let productList = [];
     let cartList = [];
 
+    // let prodList = [];
+    // let cList = [];
+
     // this event listener takes a callback function which we will user to get our data
     // from the databse and call that data 'response'
+
 
     dbRef.on('value', (response) => {
 
@@ -44,20 +48,31 @@ class App extends Component {
       this.setState({
         products: productList,
         cart: cartList
+
+        // products: prodList,
+        // cart: cList 
       })
     });
   }
 
   addToCart = (product) => {
-    const dbRef = firebase.database().ref();
+    const dbRef = firebase.database().ref('cart/');
 
-    let updatedCartList = this.state.cart;
 
-    updatedCartList.push(product);
+    let productName = product[0];
+    let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;
 
-    this.setState( {
-      cart: updatedCartList
-    })
+    let productDataObj = (productDataString);
+
+
+    // an object created with string literal
+    let itemToBeAdded = JSON.parse(`{ "${productName}" : ${productDataObj} }` )
+
+    console.log("itemtobeadded",itemToBeAdded);
+
+    // push to db
+
+    // dbRef.push(itemToBeAdded);
 
   }
 

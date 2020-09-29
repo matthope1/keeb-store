@@ -101,7 +101,6 @@
         "pink": {
             "quantity": 303
         }
-
     },
 
     "cart" : {
@@ -111,5 +110,4 @@
             "url": "http://matthopecodes.com/project-five-assets/womier.jpg"
         }
     }
-
 }

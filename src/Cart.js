@@ -5,7 +5,6 @@ class Cart extends Component {
 
     render() {
         return (
-
             <div className="nav-bar__cart-icon wrapper">
                 <a href="">
                     <i className="fas fa-shopping-cart"></i> 

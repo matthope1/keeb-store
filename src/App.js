@@ -36,14 +36,23 @@ class App extends Component {
     // this event listener takes a callback function which we will user to get our data
     // from the databse and call that data 'response'
 
-
     dbRef.on('value', (response) => {
 
       // entries returns an array of antry
       // entry[0] is the key, entry[1] is the value
 
       productList =  Object.entries(response.val().products);
-      cartList = Object.entries(response.val().cart);
+
+      // if cart has items 
+      if (response.val().cart){
+        cartList = Object.entries(response.val().cart);
+        
+        // this is how you access blackcase: ...
+        // console.log(cartList[0][1]);
+      } 
+      else {
+        cartList = [];
+      }
 
       this.setState({
         products: productList,
@@ -68,11 +77,11 @@ class App extends Component {
     // an object created with string literal
     let itemToBeAdded = JSON.parse(`{ "${productName}" : ${productDataObj} }` )
 
-    console.log("itemtobeadded",itemToBeAdded);
+    // console.log("itemtobeadded",itemToBeAdded);
 
     // push to db
 
-    // dbRef.push(itemToBeAdded);
+    dbRef.push(itemToBeAdded);
 
   }
 
@@ -97,6 +106,10 @@ class App extends Component {
             )
           })}
         </div>
+
+         <div className="cartDisplay">
+          <h1>Hello! this is cart display!! how are you doing</h1>
+        </div> 
 
         <Footer/>
       </div>

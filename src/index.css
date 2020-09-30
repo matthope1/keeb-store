@@ -77,6 +77,16 @@ a {
   width: 30%;
 }
 
+.slide-out-cart {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  background-color: white;
+}
+
 .header-background {
   background-image: url('http://matthopecodes.com/project-five-assets/alice-layout.jpg');
   background-size: cover;

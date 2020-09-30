@@ -7,6 +7,12 @@ class Product extends Component {
     // products should look good in the cart side display
     // and the collections page
 
+    // a product will either be displayed in a collection
+    // or in the cart
+
+    // depending on that the button should add it to cart or remove it from the cart
+    // we could use conditional rendering to solve this
+
     render() {
 
         const  name  = this.props.name;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import firebase from './firebase';
+import Product from './Product'
 
 class Cart extends Component {
 
@@ -32,8 +33,27 @@ class Cart extends Component {
         // depending on the slide out cart boolean
 
         if (this.state.cartSlideOut){
+
             return (
-                <p onClick={this.handleClick}>x</p>
+                <div className="slide-out-cart">
+                    <h1>Hello! this is cart display!! how are you doing</h1>
+                    <p onClick={this.handleClick}>x</p>
+                    {this.props.cartList.map((product) => {
+                        // console.log(product[1][Object.keys(product[1])]);
+
+                        let name = Object.keys(product[1]);
+                        let productInfo = product[1][Object.keys(product[1])];
+                        let key = product[0];
+
+                        return (
+                        <div>
+                            <p>this this this</p>
+                            <Product key={key} name={name} productInfo={productInfo} />
+                        </div>
+                        )
+
+                    })}
+                </div> 
             )
         }
         else{

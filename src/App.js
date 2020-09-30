@@ -103,37 +103,6 @@ class App extends Component {
           })}
         </div>
 
-         <div className="cartDisplay">
-          <h1>Hello! this is cart display!! how are you doing</h1>
-          {this.state.cart.map((product) => {
-            // console.log(product[1][Object.keys(product[1])]);
-
-            let name = Object.keys(product[1]);
-            let productInfo = product[1][Object.keys(product[1])];
-            let key = product[0];
-
-            // TODO:
-            // structure the product data so that It can be sent to a product component
-            // using props
-
-          //     return (
-          //       <div>
-          //         <p>{Object.keys(product[1])}</p>
-          //         <p>{product[1].price} {product[1].type} {product[1].url}</p>
-          //         {/* <p>{Object.values(product[1])}</p> */}
-          //       </div>
-          //     )
-
-            return (
-              <div>
-                <p>this this this</p>
-                <Product key={key} name={name} productInfo={productInfo} />
-              </div>
-            )
-
-          })}
-        </div> 
-
         <Footer/>
       </div>
     );

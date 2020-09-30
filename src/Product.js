@@ -18,13 +18,26 @@ class Product extends Component {
         const  name  = this.props.name;
         const { price, type, url } = this.props.productInfo;
 
-        return (
-            <div className="product" >
-                <h1>{ name } { price } </h1>    
-                <img className="img" src={url} alt=""/>
-                <button onClick={this.props.addToCart}> Add to cart</button>
-            </div>
-        )
+
+        if (this.props.addToCart) {
+            return (
+                <div className="product" >
+                    <h1>{ name } { price } </h1>    
+                    <img className="img" src={url} alt=""/>
+                    <button onClick={this.props.addToCart}> Add to cart</button>
+                </div>
+            )
+
+        } else {
+            return (
+                <div className="product" >
+                    <h1>{ name } { price } </h1>    
+                    <img className="img" src={url} alt=""/>
+                    <button onClick={this.props.removeFromCart}> Remove from cart</button>
+                </div>
+            )
+        }
+
     }
 }
 

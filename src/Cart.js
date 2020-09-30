@@ -28,11 +28,19 @@ class Cart extends Component {
         })
     }
 
+    removeFromCart = (product) => {
+        const dbRef = firebase.database().ref('cart/')
+
+        // console.log("Remove from cart button clicked");
+
+        let key = product[0];
+
+        dbRef.child(key).remove();
+    }
+
     render() {
-        // depending on the slide out cart boolean
-
+        // if cartSlideOut is true 
         if (this.state.cartSlideOut){
-
             return (
                 <div className="slide-out-cart">
                     <p>You have {this.props.cartList.length} item(s) in your cart!</p>
@@ -45,14 +53,14 @@ class Cart extends Component {
 
                         return (
                             <div>
-                                <Product key={key} name={name} productInfo={productInfo} />
+                                <Product removeFromCart={() => this.removeFromCart(product)} key={key} name={name} productInfo={productInfo} />
                             </div>
                         )
                     })}
                 </div> 
             )
         }
-        else{
+        else {
             return (
                 <div className="nav-bar__cart-icon wrapper">
                     <a href="">

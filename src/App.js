@@ -57,11 +57,7 @@ class App extends Component {
     dbRef.push(itemToBeAdded);
   }
 
-  deleteFromCart = (product) => {
-    const dbRef = firebase.database().ref('cart/')
-
-    // dbRef.remove()
-  }
+  
 
   handleClick = (event) => {
     event.preventDefault();
@@ -72,7 +68,7 @@ class App extends Component {
   render (){
     return (
       <div className="App">
-        <Header cartList={this.state.cart} />
+        <Header cartList={this.state.cart} removeFromCart={this.removeFromCart}/>
         <div className="header-background">
           <button onClick={this.handleClick}>Enter store</button>
         </div> 
@@ -82,7 +78,6 @@ class App extends Component {
             return (
               <Product 
                 addToCart={() => this.addToCart(product)} 
-                deleteFromCart = {() => this.deleteFromCart(product)} 
                 key={product[0]} 
                 name={product[0]} 
                 productInfo={product[1]}

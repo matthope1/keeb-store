@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       products: [],
       cart: [],
+      inventory: [],
     }
   }
 
@@ -22,6 +23,7 @@ class App extends Component {
     // lists that will be populated with data from firebase
     let productList = [];
     let cartList = [];
+    let inventoryList = [];
 
     // event listener that will fire every time there is a change
     // in the firebase db
@@ -30,7 +32,8 @@ class App extends Component {
       // for each product, entries will make an array with 2 elements
       // 0(index) being the key and 1(index) being the value
       productList =  Object.entries(response.val().products);
-
+      inventoryList = Object.entries(response.val().inventory);
+    
       if (response.val().cart){
         cartList = Object.entries(response.val().cart);
       } 
@@ -52,7 +55,7 @@ class App extends Component {
     let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;
     let productDataObj = (productDataString);
 
-    let itemToBeAdded = JSON.parse(`{ "${productName}" : ${productDataObj} }` )
+    let itemToBeAdded = JSON.parse(`{ "${productName}" : ${productDataObj} }` );
 
     dbRef.push(itemToBeAdded);
   }

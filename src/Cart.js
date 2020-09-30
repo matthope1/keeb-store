@@ -16,12 +16,12 @@ class Cart extends Component {
 
         let slideOutDisplay = this.state.cartSlideOut;
 
-        if (!slideOutDisplay){
-            console.log("was false setting true...");
-        }
-        else{
-            console.log("was true setting false...");
-        }
+        // if (!slideOutDisplay){
+        //     console.log("was false setting true...");
+        // }
+        // else{
+        //     console.log("was true setting false...");
+        // }
 
         this.setState({
             cartSlideOut: !slideOutDisplay,
@@ -41,24 +41,37 @@ class Cart extends Component {
     render() {
         // if cartSlideOut is true 
         if (this.state.cartSlideOut){
+
+            let total = 0;
             return (
                 <div className="slide-out-cart">
-                    <p>You have {this.props.cartList.length} item(s) in your cart!</p>
-                    <a href="" onClick={this.handleClick}>x</a>
-                    {this.props.cartList.map((product) => {
+                    <div className="slide-out-cart-container">
+                        <h1 href="" onClick={this.handleClick}>x</h1>
+                        <p>You have {this.props.cartList.length} item(s) in your cart!</p>
+                        {this.props.cartList.map((product) => {
 
-                        let name = Object.keys(product[1]);
-                        let productInfo = product[1][Object.keys(product[1])];
-                        let key = product[0];
+                            let name = Object.keys(product[1]);
+                            let productInfo = product[1][Object.keys(product[1])];
+                            let key = product[0];
 
-                        return (
-                            <div>
-                                <Product removeFromCart={() => this.removeFromCart(product)} key={key} name={name} productInfo={productInfo} />
-                            </div>
-                        )
-                    })}
-                </div> 
-            )
+                            total = total + parseInt(productInfo.price);
+
+                            return (
+                                <div>
+                                    <Product removeFromCart={() => this.removeFromCart(product)} key={key} name={name} productInfo={productInfo} />
+                                </div>
+                            )
+                        })}
+                        {/* TODO: 
+                            add a display for the order total
+                        */}
+                        <div className="cart-info">
+                            <hr/>
+                            <p>Your order total = ${total} </p>
+                        </div>
+                    </div> 
+                </div>
+           )
         }
         else {
             return (

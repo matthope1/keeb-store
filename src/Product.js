@@ -22,7 +22,7 @@ class Product extends Component {
         if (this.props.addToCart) {
             return (
                 <div className="product" >
-                    <h1>{ name } { price } </h1>    
+                    <h1>{ name }  ${ price } </h1>    
                     <img className="img" src={url} alt=""/>
                     <button onClick={this.props.addToCart}> Add to cart</button>
                 </div>
@@ -31,7 +31,7 @@ class Product extends Component {
         } else {
             return (
                 <div className="product" >
-                    <h1>{ name } { price } </h1>    
+                    <h1>{ name }  ${ price } </h1>    
                     <img className="img" src={url} alt=""/>
                     <button onClick={this.props.removeFromCart}> Remove from cart</button>
                 </div>

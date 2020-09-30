@@ -67,12 +67,9 @@ class App extends Component {
   addToCart = (product) => {
     const dbRef = firebase.database().ref('cart/');
 
-
     let productName = product[0];
     let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;
-
     let productDataObj = (productDataString);
-
 
     // an object created with string literal
     let itemToBeAdded = JSON.parse(`{ "${productName}" : ${productDataObj} }` )
@@ -82,7 +79,6 @@ class App extends Component {
     // push to db
 
     dbRef.push(itemToBeAdded);
-
   }
 
   handleClick = (event) => {
@@ -94,7 +90,7 @@ class App extends Component {
   render (){
     return (
       <div className="App">
-        <Header cartList={this.state.cart} />
+        <Header cartList={this.state.cart} handleClick={this.handleClick} />
         <div className="header-background">
           <button onClick={this.handleClick}>Enter store</button>
         </div> 
@@ -109,6 +105,13 @@ class App extends Component {
 
          <div className="cartDisplay">
           <h1>Hello! this is cart display!! how are you doing</h1>
+          {this.state.cart.map((product) => {
+            // console.log("here",product[1]);
+            // console.log(Object.keys(product[1]));
+              return (
+                <p>{Object.keys(product[1])}</p>
+              )
+          })}
         </div> 
 
         <Footer/>

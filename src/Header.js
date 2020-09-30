@@ -15,7 +15,7 @@ class Header extends Component {
                             <li><a href="">Store</a></li>
                             <li><a href="">Contact</a></li>
                         </ul>
-                        <Cart cartList={this.props.cartList} />
+                        <Cart cartList={this.props.cartList} handleClick={this.props.handleClick}/>
                    </div>
                 </nav>
             </div>

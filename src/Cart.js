@@ -7,7 +7,7 @@ class Cart extends Component {
         return (
             <div className="nav-bar__cart-icon wrapper">
                 <a href="">
-                    <i className="fas fa-shopping-cart"></i> 
+                    <i className="fas fa-shopping-cart" onClick={this.props.handleClick}></i> 
                 </a>
                 <p>{this.props.cartList.length}</p>
             </div>

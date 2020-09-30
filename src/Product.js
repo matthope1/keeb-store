@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 
 class Product extends Component {
+    //TODO:
+    // product and everthing that it contains
+    // should be able to resize depending on its container
+    // products should look good in the cart side display
+    // and the collections page
 
     render() {
 
@@ -8,15 +13,10 @@ class Product extends Component {
         const { price, type, url } = this.props.productInfo;
 
         return (
-            // console.log("this.props:", this.props),
             <div className="product" >
                 <h1>{ name } { price } </h1>    
                 <img className="img" src={url} alt=""/>
                 <button onClick={this.props.addToCart}> Add to cart</button>
-                {/* TODO: add an add to cart button 
-                    bind it to a function that will
-                    update the cart state with the new product
-                 */}
             </div>
         )
     }

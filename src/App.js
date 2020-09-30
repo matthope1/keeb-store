@@ -90,7 +90,7 @@ class App extends Component {
   render (){
     return (
       <div className="App">
-        <Header cartList={this.state.cart} handleClick={this.handleClick} />
+        <Header cartList={this.state.cart} />
         <div className="header-background">
           <button onClick={this.handleClick}>Enter store</button>
         </div> 
@@ -106,7 +106,7 @@ class App extends Component {
          <div className="cartDisplay">
           <h1>Hello! this is cart display!! how are you doing</h1>
           {this.state.cart.map((product) => {
-            console.log(product[1][Object.keys(product[1])]);
+            // console.log(product[1][Object.keys(product[1])]);
 
             let name = Object.keys(product[1]);
             let productInfo = product[1][Object.keys(product[1])];

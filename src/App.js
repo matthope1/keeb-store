@@ -10,10 +10,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-
-      // each element of products is an array with 2 indexes
-      // the first index being the name the products
-      // the second index being the information on the product
       products: [],
       cart: [],
     }
@@ -21,34 +17,22 @@ class App extends Component {
 
   componentDidMount() {
     // variable that holds a reference to our database
-
     const dbRef = firebase.database().ref();
 
-    // add an event listenter that will fire every time there
-    // is a change in the db
-
+    // lists that will be populated with data from firebase
     let productList = [];
     let cartList = [];
 
-    // let prodList = [];
-    // let cList = [];
-
-    // this event listener takes a callback function which we will user to get our data
-    // from the databse and call that data 'response'
-
+    // event listener that will fire every time there is a change
+    // in the firebase db
     dbRef.on('value', (response) => {
 
-      // entries returns an array of antry
-      // entry[0] is the key, entry[1] is the value
-
+      // for each product, entries will make an array with 2 elements
+      // 0(index) being the key and 1(index) being the value
       productList =  Object.entries(response.val().products);
 
-      // if cart has items 
       if (response.val().cart){
         cartList = Object.entries(response.val().cart);
-        
-        // this is how you access blackcase: ...
-        // console.log(cartList[0][1]);
       } 
       else {
         cartList = [];
@@ -57,9 +41,6 @@ class App extends Component {
       this.setState({
         products: productList,
         cart: cartList
-
-        // products: prodList,
-        // cart: cList 
       })
     });
   }
@@ -71,14 +52,15 @@ class App extends Component {
     let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;
     let productDataObj = (productDataString);
 
-    // an object created with string literal
     let itemToBeAdded = JSON.parse(`{ "${productName}" : ${productDataObj} }` )
 
-    // console.log("itemtobeadded",itemToBeAdded);
-
-    // push to db
-
     dbRef.push(itemToBeAdded);
+  }
+
+  deleteFromCart = (product) => {
+    const dbRef = firebase.database().ref('cart/')
+
+    // dbRef.remove()
   }
 
   handleClick = (event) => {
@@ -98,7 +80,13 @@ class App extends Component {
         <div className="products-flex wrapper">
           {this.state.products.map((product) => {
             return (
-              <Product addToCart={() => this.addToCart(product)} key={product[0]} name={product[0]} productInfo={product[1]} />
+              <Product 
+                addToCart={() => this.addToCart(product)} 
+                deleteFromCart = {() => this.deleteFromCart(product)} 
+                key={product[0]} 
+                name={product[0]} 
+                productInfo={product[1]}
+              />
             )
           })}
         </div>

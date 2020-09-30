@@ -26,7 +26,6 @@ class Cart extends Component {
         this.setState({
             cartSlideOut: !slideOutDisplay,
         })
-        
     }
 
     render() {
@@ -36,22 +35,19 @@ class Cart extends Component {
 
             return (
                 <div className="slide-out-cart">
-                    <h1>Hello! this is cart display!! how are you doing</h1>
-                    <p onClick={this.handleClick}>x</p>
+                    <p>You have {this.props.cartList.length} item(s) in your cart!</p>
+                    <a href="" onClick={this.handleClick}>x</a>
                     {this.props.cartList.map((product) => {
-                        // console.log(product[1][Object.keys(product[1])]);
 
                         let name = Object.keys(product[1]);
                         let productInfo = product[1][Object.keys(product[1])];
                         let key = product[0];
 
                         return (
-                        <div>
-                            <p>this this this</p>
-                            <Product key={key} name={name} productInfo={productInfo} />
-                        </div>
+                            <div>
+                                <Product key={key} name={name} productInfo={productInfo} />
+                            </div>
                         )
-
                     })}
                 </div> 
             )

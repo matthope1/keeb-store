@@ -85,13 +85,14 @@ a {
   right: 0;
   top: 0;
   background-color: white;
+  box-shadow: 0 8px 6px 1px black;
 }
 
 .header-background {
   background-image: url('http://matthopecodes.com/project-five-assets/alice-layout.jpg');
   background-size: cover;
   background-attachment: scroll;
-  background-position: center;
+  background-position: top;
   height: 70vh;
   padding-top: 400px;
 }

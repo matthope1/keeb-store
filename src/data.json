@@ -2,62 +2,62 @@
     "products": {
         "womier": {
             "price": 80,
-            "type": "kb",
+            "type": "keyboard",
             "url": "http://matthopecodes.com/project-five-assets/womier.jpg"
         },
         "skPink": {
             "price": 60,
-            "type": "kb",
+            "type": "keyboard",
             "url": "http://matthopecodes.com/project-five-assets/skPink2.jpg"
         },
         "skGrey": {
             "price": 60,
-            "type": "kb",
+            "type": "keyboard",
             "url": "http://matthopecodes.com/project-five-assets/skGrey2.jpg"
         },
         "blackCase": {
             "price": 50,
-            "type": "ca",
+            "type": "case",
             "url":"http://matthopecodes.com/project-five-assets/blackCase.jpg"
         },
         "blueCase": {
             "price": 50,
-            "type": "ca",
+            "type": "case",
             "url":"http://matthopecodes.com/project-five-assets/blueCase.jpg"
         },
         "redCase": {
             "price": 50,
-            "type": "ca",
+            "type": "case",
             "url":"http://matthopecodes.com/project-five-assets/redCase.jpg"
         },
         "owlCap": {
             "price": 30,
-            "type": "kc",
+            "type": "keycap",
             "url": "http://matthopecodes.com/project-five-assets/keycaps2.jpg"
         },
        "drinkCap": {
             "price": 30,
-            "type": "kc",
+            "type": "keycap",
             "url": "http://matthopecodes.com/project-five-assets/keycaps3.jpg"
         },
        "greyCaps": {
             "price": 60,
-            "type": "kc",
+            "type": "keycap",
             "url": "http://matthopecodes.com/project-five-assets/keycaps1.jpg"
         },
         "sherbet": {
             "price": 3,
-            "type": "sw",
+            "type": "switch",
             "url": "http://matthopecodes.com/project-five-assets/switch1.jpg"
         },
         "blueberry": {
             "price": 3,
-            "type": "sw",
+            "type": "switch",
             "url": "http://matthopecodes.com/project-five-assets/switch2.jpg"
         },
         "pink": {
             "price": 3,
-            "type": "sw",
+            "type": "switch",
             "url": "http://matthopecodes.com/project-five-assets/switch3.jpg"
         }
 

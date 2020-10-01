@@ -30,9 +30,8 @@ class Cart extends Component {
     }
 
     render() {
-        // if cartSlideOut is true 
         if (this.state.cartSlideOut){
-
+            //slide out cart display
             let total = 0;
             return (
                 <div className="slide-out-cart">

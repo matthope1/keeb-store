@@ -23,43 +23,6 @@ class App extends Component {
     // variable that holds a reference to our database
     const dbRef = firebase.database().ref();
 
-
-    //TODO: 
-
-    // firebase.auth().signInAnonymously().catch(function(error) {
-    //   // Handle Errors here.
-    //   var errorCode = error.code;
-    //   var errorMessage = error.message;
-
-    //   console.log(errorCode);
-    //   console.log(errorMessage);
-    // }); 
-
-
-    // firebase.auth().onAuthStateChanged( (user) => {
-    //   if (user) {
-    //     const uid = user.uid;
-    //     console.log(uid);
-    //     this.setState({
-    //       uid: uid,
-    //     })
-
-    //     // we want each user to have their own cart
-    //     dbRef.child('cart').push(uid);
-    //     dbRef.child('cart').child(uid).push(this.state.cart);
-
-
-
-    //   }
-    //   else {
-    //     console.log('signed out');
-    //   }
-    // });
-
-
-
-
-
     // lists that will be populated with data from firebase
     let productList = [];
     let cartList = [];
@@ -68,20 +31,6 @@ class App extends Component {
     // event listener that will fire every time there is a change
     // in the firebase db
     dbRef.on('value', (response) => {
-
-
-      // TODO: 
-
-      // const data = response.val();
-
-      // if (data) {
-      //   console.log(data);
-      //   let user = data.cart[this.state.uid]; 
-      //   console.log("printing user data");
-      //   for (let key in user) {
-      //     console.log(key, user[key]);
-      //   }
-      // }
 
       // for each product, entries will make an array with 2 elements
       // 0(index) being the key and 1(index) being the value
@@ -100,6 +49,7 @@ class App extends Component {
         cart: cartList,
         pageLoading: false
       })
+      
     });
   }
 
@@ -128,8 +78,6 @@ class App extends Component {
 
   handleClick = (event) => {
     event.preventDefault();
-
-    // console.log("handleClick function called");
   }
 
   render (){
@@ -145,6 +93,7 @@ class App extends Component {
 
       let productsList = [...this.state.products];
 
+      //filter the displayed produducts based on user input
       let filteredProds = productsList.filter((product) => {
         let productInfo = product[1];
 
@@ -162,10 +111,10 @@ class App extends Component {
 
           <div className="orderBy">
             <h2>browse by: </h2>
-            <button onClick={(event) => {this.orderBySelection(event)}} value="keyboard">keyboards</button>
-            <button onClick={(event) => {this.orderBySelection(event)}} value="case">cases</button>
-            <button onClick={(event) => {this.orderBySelection(event)}} value="keycap">keycaps</button>
-            <button onClick={(event) => {this.orderBySelection(event)}} value="all">all</button>
+            <button className="orderBy__btn" onClick={(event) => {this.orderBySelection(event)}} value="keyboard">keyboards</button>
+            <button className="orderBy__btn" onClick={(event) => {this.orderBySelection(event)}} value="case">cases</button>
+            <button className="orderBy__btn" onClick={(event) => {this.orderBySelection(event)}} value="keycap">keycaps</button>
+            <button className="orderBy__btn" onClick={(event) => {this.orderBySelection(event)}} value="all">all</button>
           </div>
 
           <div className="products-flex wrapper">

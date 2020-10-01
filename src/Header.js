@@ -11,9 +11,7 @@ class Header extends Component {
                             <img className="img" src="http://matthopecodes.com/project-five-assets/keebStoreLogo.png" alt="logo"/>
                         </div>
                         <ul className="nav-bar__links">
-                            <li><a href="">Home</a></li>
-                            <li><a href="">Store</a></li>
-                            <li><a href="">Contact</a></li>
+                            <h1>keeb-store</h1>
                         </ul>
                         <Cart cartList={this.props.cartList} />
                    </div>

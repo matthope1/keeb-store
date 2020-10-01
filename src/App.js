@@ -106,18 +106,18 @@ class App extends Component {
         <div className="App">
           <Header cartList={this.state.cart} removeFromCart={this.removeFromCart}/>
           <div className="header-background">
-            <button onClick={this.handleClick}>Enter store</button>
-          </div> 
-
-          <div className="orderBy">
-            <h2>browse by: </h2>
-            <button className="orderBy__btn" onClick={(event) => {this.orderBySelection(event)}} value="keyboard">keyboards</button>
-            <button className="orderBy__btn" onClick={(event) => {this.orderBySelection(event)}} value="case">cases</button>
-            <button className="orderBy__btn" onClick={(event) => {this.orderBySelection(event)}} value="keycap">keycaps</button>
-            <button className="orderBy__btn" onClick={(event) => {this.orderBySelection(event)}} value="all">all</button>
+            <button><a href="#order-by">Enter store</a></button>
           </div>
 
-          <div className="products-flex wrapper">
+          <div id="order-by" className="order-by">
+            <h2>browse by: </h2>
+            <button className="order-by__btn" onClick={(event) => {this.orderBySelection(event)}} value="keyboard">keyboards</button>
+            <button className="order-by__btn" onClick={(event) => {this.orderBySelection(event)}} value="case">cases</button>
+            <button className="order-by__btn" onClick={(event) => {this.orderBySelection(event)}} value="keycap">keycaps</button>
+            <button className="order-by__btn" onClick={(event) => {this.orderBySelection(event)}} value="all">all</button>
+          </div>
+
+          <div id="products" className="products-flex wrapper">
            
             {filteredProds.map((product) => {
               return (

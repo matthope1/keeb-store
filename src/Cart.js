@@ -36,7 +36,7 @@ class Cart extends Component {
             return (
                 <div className="slide-out-cart">
                     <div className="slide-out-cart-container">
-                        <h1 href="" onClick={this.handleClick}>x</h1>
+                        <h1 className="slide-out-cart__exit-btn" onClick={this.handleClick}>x</h1>
                         <p>You have {this.props.cartList.length} item(s) in your cart!</p>
                         {this.props.cartList.map((product) => {
 
@@ -64,7 +64,7 @@ class Cart extends Component {
             return (
                 <div className="nav-bar__cart-icon wrapper">
                     <a href="">
-                        <i className="fas fa-shopping-cart" onClick={this.handleClick}></i> 
+                        <i className="fas fa-shopping-cart cart-icon" onClick={this.handleClick}></i> 
                     </a>
                     <p>{this.props.cartList.length}</p>
                 </div>

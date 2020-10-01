@@ -137,6 +137,7 @@ a {
   top: 0;
   background-color: white;
   box-shadow: 0 8px 6px 1px black;
+  transition: width .5s;
 }
 
 .slide-out-cart-container {
@@ -177,17 +178,25 @@ a {
 }
 
 
-.orderBy {
+.order-by {
   padding: 50px 0;
 
 }
 
-.orderBy__btn {
+.order-by__btn {
   margin: 5px 10px;
   background-color: none;
   
 }
 
+.slide-out-cart__exit-btn:hover {
+  color: var(--carolina-blue);
+  cursor: pointer;
+}
+
+.cart-icon:hover {
+  color: var(--carolina-blue);
+}
 
 footer {
   padding-top: 100px;

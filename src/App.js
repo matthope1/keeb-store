@@ -13,6 +13,8 @@ class App extends Component {
       products: [],
       cart: [],
       inventory: [],
+      orderBy: 'all',
+      pageLoading: true,
     }
   }
 
@@ -43,7 +45,8 @@ class App extends Component {
 
       this.setState({
         products: productList,
-        cart: cartList
+        cart: cartList,
+        pageLoading: false
       })
     });
   }
@@ -60,6 +63,17 @@ class App extends Component {
     dbRef.push(itemToBeAdded);
   }
 
+
+  orderBySelection = (event) => {
+    event.preventDefault();
+    let userSelection = event.target.value;
+
+
+    console.log(userSelection);
+    this.setState({
+      orderBy: userSelection,
+    })
+  }
   
 
   handleClick = (event) => {
@@ -69,29 +83,71 @@ class App extends Component {
   }
 
   render (){
-    return (
-      <div className="App">
-        <Header cartList={this.state.cart} removeFromCart={this.removeFromCart}/>
-        <div className="header-background">
-          <button onClick={this.handleClick}>Enter store</button>
-        </div> 
 
-        <div className="products-flex wrapper">
-          {this.state.products.map((product) => {
-            return (
-              <Product 
-                addToCart={() => this.addToCart(product)} 
-                key={product[0]} 
-                name={product[0]} 
-                productInfo={product[1]}
-              />
-            )
-          })}
+    if (this.state.pageLoading) {
+      return (
+        <div className="page-loader">
+          <h1>loading...</h1>
         </div>
+      )
+    }
+    else {
 
-        <Footer/>
-      </div>
-    );
+      let productsList = [...this.state.products];
+
+      let filteredProds = productsList.filter((product) => {
+        let productInfo = product[1];
+        // console.log("info:", productInfo.type);
+        // console.log("user Selection: ",this.state.orderBy);
+        if (productInfo.type == this.state.orderBy || this.state.orderBy == 'all') {
+          return product;
+        }
+      })
+
+      return (
+        <div className="App">
+          <Header cartList={this.state.cart} removeFromCart={this.removeFromCart}/>
+          <div className="header-background">
+            <button onClick={this.handleClick}>Enter store</button>
+          </div> 
+
+          <div className="orderBy">
+            <h2>browse by: </h2>
+            <button onClick={(event) => {this.orderBySelection(event)}} value="keyboard">keyboards</button>
+            <button onClick={(event) => {this.orderBySelection(event)}} value="case">cases</button>
+            <button onClick={(event) => {this.orderBySelection(event)}} value="keycap">keycaps</button>
+            <button onClick={(event) => {this.orderBySelection(event)}} value="all">all</button>
+          </div>
+
+          <div className="products-flex wrapper">
+            {/* {this.state.products.map((product) => {
+              return (
+                <Product 
+                  addToCart={() => this.addToCart(product)} 
+                  key={product[0]} 
+                  name={product[0]} 
+                  productInfo={product[1]}
+                />
+              )
+            })} */}
+            {filteredProds.map((product) => {
+              return (
+                <Product 
+                  addToCart={() => this.addToCart(product)} 
+                  key={product[0]} 
+                  name={product[0]} 
+                  productInfo={product[1]}
+                />
+              )
+            })}
+
+          </div>
+
+          <Footer/>
+        </div>
+      )
+    }
+   
   }
 }
 

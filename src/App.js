@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './firebase';
+import 'firebase/auth';
 import './App.css';
 
 import Header from './Header';
@@ -22,6 +23,43 @@ class App extends Component {
     // variable that holds a reference to our database
     const dbRef = firebase.database().ref();
 
+
+    //TODO: 
+
+    // firebase.auth().signInAnonymously().catch(function(error) {
+    //   // Handle Errors here.
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+
+    //   console.log(errorCode);
+    //   console.log(errorMessage);
+    // }); 
+
+
+    // firebase.auth().onAuthStateChanged( (user) => {
+    //   if (user) {
+    //     const uid = user.uid;
+    //     console.log(uid);
+    //     this.setState({
+    //       uid: uid,
+    //     })
+
+    //     // we want each user to have their own cart
+    //     dbRef.child('cart').push(uid);
+    //     dbRef.child('cart').child(uid).push(this.state.cart);
+
+
+
+    //   }
+    //   else {
+    //     console.log('signed out');
+    //   }
+    // });
+
+
+
+
+
     // lists that will be populated with data from firebase
     let productList = [];
     let cartList = [];
@@ -30,6 +68,20 @@ class App extends Component {
     // event listener that will fire every time there is a change
     // in the firebase db
     dbRef.on('value', (response) => {
+
+
+      // TODO: 
+
+      // const data = response.val();
+
+      // if (data) {
+      //   console.log(data);
+      //   let user = data.cart[this.state.uid]; 
+      //   console.log("printing user data");
+      //   for (let key in user) {
+      //     console.log(key, user[key]);
+      //   }
+      // }
 
       // for each product, entries will make an array with 2 elements
       // 0(index) being the key and 1(index) being the value
@@ -68,8 +120,6 @@ class App extends Component {
     event.preventDefault();
     let userSelection = event.target.value;
 
-
-    console.log(userSelection);
     this.setState({
       orderBy: userSelection,
     })
@@ -79,7 +129,7 @@ class App extends Component {
   handleClick = (event) => {
     event.preventDefault();
 
-    console.log("handleClick function called");
+    // console.log("handleClick function called");
   }
 
   render (){
@@ -97,8 +147,7 @@ class App extends Component {
 
       let filteredProds = productsList.filter((product) => {
         let productInfo = product[1];
-        // console.log("info:", productInfo.type);
-        // console.log("user Selection: ",this.state.orderBy);
+
         if (productInfo.type == this.state.orderBy || this.state.orderBy == 'all') {
           return product;
         }
@@ -120,16 +169,7 @@ class App extends Component {
           </div>
 
           <div className="products-flex wrapper">
-            {/* {this.state.products.map((product) => {
-              return (
-                <Product 
-                  addToCart={() => this.addToCart(product)} 
-                  key={product[0]} 
-                  name={product[0]} 
-                  productInfo={product[1]}
-                />
-              )
-            })} */}
+           
             {filteredProds.map((product) => {
               return (
                 <Product 

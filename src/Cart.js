@@ -16,13 +16,6 @@ class Cart extends Component {
 
         let slideOutDisplay = this.state.cartSlideOut;
 
-        // if (!slideOutDisplay){
-        //     console.log("was false setting true...");
-        // }
-        // else{
-        //     console.log("was true setting false...");
-        // }
-
         this.setState({
             cartSlideOut: !slideOutDisplay,
         })
@@ -30,8 +23,6 @@ class Cart extends Component {
 
     removeFromCart = (product) => {
         const dbRef = firebase.database().ref('cart/')
-
-        // console.log("Remove from cart button clicked");
 
         let key = product[0];
 
@@ -62,9 +53,6 @@ class Cart extends Component {
                                 </div>
                             )
                         })}
-                        {/* TODO: 
-                            add a display for the order total
-                        */}
                         <div className="cart-info">
                             <hr/>
                             <p>Your order total = ${total} </p>
@@ -83,8 +71,6 @@ class Cart extends Component {
                 </div>
             )
         }
-        
-       
     }
 }
 

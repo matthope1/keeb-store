@@ -191,7 +191,6 @@ a {
 
 .slide-out-cart__exit-btn:hover {
   color: var(--carolina-blue);
-  cursor: pointer;
 }
 
 .cart-icon:hover {

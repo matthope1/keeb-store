@@ -97,7 +97,7 @@ class App extends Component {
       let filteredProds = productsList.filter((product) => {
         let productInfo = product[1];
 
-        if (productInfo.type == this.state.orderBy || this.state.orderBy == 'all') {
+        if (productInfo.type === this.state.orderBy || this.state.orderBy === 'all') {
           return product;
         }
       })

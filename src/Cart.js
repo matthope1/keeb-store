@@ -36,13 +36,13 @@ class Cart extends Component {
             return (
                 <div className="slide-out-cart">
                     <div className="slide-out-cart-container">
-                        <a href="" className="slide-out-cart__exit-btn" onClick={this.handleClick}>x</a>
+                        <a href="#" className="slide-out-cart__exit-btn" onClick={this.handleClick}>x</a>
                         <p>You have {this.props.cartList.length} item(s) in your cart!</p>
-                        {this.props.cartList.map((product) => {
+                        {this.props.cartList.map((product, i) => {
 
                             let name = Object.keys(product[1]);
                             let productInfo = product[1][Object.keys(product[1])];
-                            let key = product[0];
+                            let key = i;
 
                             total = total + parseInt(productInfo.price);
 

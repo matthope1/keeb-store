@@ -174,23 +174,23 @@ a {
   margin: 15px auto;
 }
 
-
 .page-loader {
   width: 50%;
   margin: 0 auto;
   margin-top: 200px;
 }
 
-
 .order-by {
   padding: 50px 0;
-
 }
 
 .order-by__btn {
   margin: 5px 10px;
   background-color: none;
-  
+}
+
+.slide-out-cart__exit-btn {
+  font-size: 3rem;
 }
 
 .slide-out-cart__exit-btn:hover {
@@ -204,7 +204,6 @@ a {
 footer {
   padding-top: 100px;
 }
-
 
 /* media queries */
 

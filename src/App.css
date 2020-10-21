@@ -128,10 +128,14 @@ a {
   width: 30%;
 }
 
+.nav-bar__cart-icon p {
+  margin: 0;
+}
+
 .slide-out-cart {
   height: 100%;
-  width: 40%;
   position: fixed;
+  width: 40%;
   z-index: 1;
   right: 0;
   top: 0;
@@ -219,13 +223,31 @@ footer {
   }
 
   .slide-out-cart {
-    width: 55%;
+    width: 100%;
   }
 }
 
 /* Landscape phones and down */
 @media (max-width: 480px) {
   .wrapper {
-    width: 95%;
+    width: 100%;
   }
+
+  .nav-bar {
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    width: 30%;
+  }
+
+  .nav-bar__links {
+    width: 70%;
+  }
+
+  .nav-bar__cart-icon {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
 }

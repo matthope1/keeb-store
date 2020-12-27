@@ -64,17 +64,17 @@ class App extends Component {
     // in the firebase db
     dbRef.on('value', (response) => {
 
-      console.log(response);
+      console.log("response:");
+      console.log(response.val());
       // for each product, entries will make an array with 2 elements
       // 0(index) being the key and 1(index) being the value
       productList =  Object.entries(response.val().products);
       inventoryList = Object.entries(response.val().inventory);
 
-      // TODO: change this to work with new user/cart object in firebase settings
-    
-      if (response.val().cart){
-        cartList = Object.entries(response.val().cart);
-      } 
+      
+      if (this.state.user) {
+        cartList = Object.entries(response.val().users[this.state.user.uid].cart);
+      }
       else {
         cartList = [];
       }
@@ -89,7 +89,9 @@ class App extends Component {
   }
   // TODO: change this to work with new user/cart object in firebase storage
   addToCart = (product) => {
-    const dbRef = firebase.database().ref('users/' + this.state.user.uid);
+
+    let cartPath = `users/${this.state.user.uid}/cart`;
+    const dbRef = firebase.database().ref(cartPath);
 
     let productName = product[0];
     let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;

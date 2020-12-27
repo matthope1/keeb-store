@@ -29,7 +29,15 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount() { 
+
+    // check to see if the user was already logged in from prev session
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+      } 
+    });
+
     // variable that holds a reference to our database
     const dbRef = firebase.database().ref();
 

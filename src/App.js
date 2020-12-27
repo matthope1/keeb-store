@@ -12,6 +12,10 @@ import Header from './Header';
 import Footer from './Footer';
 import Product from './Product';
 
+
+const provider = new firebase.auth.GoogleAuthProvider();
+const auth = firebase.auth();
+
 class App extends Component {
   constructor() {
     super();
@@ -80,7 +84,6 @@ class App extends Component {
       orderBy: userSelection,
     })
   }
-  
 
   handleClick = (event) => {
     event.preventDefault();
@@ -97,6 +100,31 @@ class App extends Component {
     return filteredProds;
   }
 
+  login = () => {
+    auth.signInWithPopup(provider) 
+      .then((result) => {
+        const user = result.user;
+        this.setState({
+          user
+        });
+      }).catch(function(error){
+        var errorCode = error.code;
+        console.log(errorCode);
+      });
+  }
+
+  logout  = () => {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        });
+      }).catch(function(error){
+        var errorCode = error.code;
+        console.log(errorCode);
+      });
+  }
+
   render (){
 
     if (this.state.pageLoading) {
@@ -109,14 +137,13 @@ class App extends Component {
     else {
 
       let productsList = [...this.state.products];
-
       //filter the displayed produducts based on user input
       let filteredProds = this.getFilteredProds(productsList);
-      
 
       return (
         <div className="App">
           <Header cartList={this.state.cart} removeFromCart={this.removeFromCart}/>
+          {this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>}
           <div className="header-background">
             <button><a href="#order-by">Enter store</a></button>
           </div>

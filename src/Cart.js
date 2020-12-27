@@ -21,11 +21,10 @@ class Cart extends Component {
         })
     }
 
+    // TODO: change this to work with new users/cart object in firebase
     removeFromCart = (product) => {
-        const dbRef = firebase.database().ref('cart/')
-
+        const dbRef = firebase.database().ref('cart/' + this.props.userInfo.uid);
         let key = product[0];
-
         dbRef.child(key).remove();
     }
 

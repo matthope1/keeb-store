@@ -13,7 +13,7 @@ class Header extends Component {
                         <ul className="nav-bar__links">
                             <h1>keeb-store</h1>
                         </ul>
-                        <Cart cartList={this.props.cartList} />
+                        <Cart cartList={this.props.cartList} userInfo={this.props.userInfo} />
                    </div>
                 </nav>
             </div>

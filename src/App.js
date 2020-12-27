@@ -32,11 +32,25 @@ class App extends Component {
   componentDidMount() { 
 
     // check to see if the user was already logged in from prev session
+
+
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
       } 
     });
+    
+    if (!(this.state.user)) {
+      auth.signInAnonymously()
+      .then(() => {
+        console.log("anon login")
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+      });
+    }
 
     // variable that holds a reference to our database
     const dbRef = firebase.database().ref();
@@ -50,10 +64,13 @@ class App extends Component {
     // in the firebase db
     dbRef.on('value', (response) => {
 
+      console.log(response);
       // for each product, entries will make an array with 2 elements
       // 0(index) being the key and 1(index) being the value
       productList =  Object.entries(response.val().products);
       inventoryList = Object.entries(response.val().inventory);
+
+      // TODO: change this to work with new user/cart object in firebase settings
     
       if (response.val().cart){
         cartList = Object.entries(response.val().cart);
@@ -70,9 +87,9 @@ class App extends Component {
       
     });
   }
-
+  // TODO: change this to work with new user/cart object in firebase storage
   addToCart = (product) => {
-    const dbRef = firebase.database().ref('cart/');
+    const dbRef = firebase.database().ref('users/' + this.state.user.uid);
 
     let productName = product[0];
     let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;
@@ -150,7 +167,7 @@ class App extends Component {
 
       return (
         <div className="App">
-          <Header cartList={this.state.cart} removeFromCart={this.removeFromCart}/>
+          <Header cartList={this.state.cart} removeFromCart={this.removeFromCart} userInfo={this.state.user}/>
           {this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>}
           <div className="header-background">
             <button><a href="#order-by">Enter store</a></button>

@@ -21,6 +21,7 @@ class App extends Component {
       inventory: [],
       orderBy: 'all',
       pageLoading: true,
+      user: null,
     }
   }
 
@@ -85,6 +86,17 @@ class App extends Component {
     event.preventDefault();
   }
 
+  getFilteredProds = (productsList) => {
+    let filteredProds = productsList.filter((product) => {
+      let productInfo = product[1];
+      if (productInfo.type === this.state.orderBy || this.state.orderBy === 'all') {
+        return product;
+      }
+    })
+    
+    return filteredProds;
+  }
+
   render (){
 
     if (this.state.pageLoading) {
@@ -99,13 +111,8 @@ class App extends Component {
       let productsList = [...this.state.products];
 
       //filter the displayed produducts based on user input
-      let filteredProds = productsList.filter((product) => {
-        let productInfo = product[1];
-
-        if (productInfo.type === this.state.orderBy || this.state.orderBy === 'all') {
-          return product;
-        }
-      })
+      let filteredProds = this.getFilteredProds(productsList);
+      
 
       return (
         <div className="App">

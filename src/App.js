@@ -71,9 +71,12 @@ class App extends Component {
       productList =  Object.entries(response.val().products);
       inventoryList = Object.entries(response.val().inventory);
 
+      // TODO: figure out how to structure data in firebase 
+
+      let cartQuery = Object.entries(response.val().users[this.state.user.uid].cart);
       
-      if (this.state.user) {
-        cartList = Object.entries(response.val().users[this.state.user.uid].cart);
+      if (cartQuery) {
+        cartList = cartQuery;
       }
       else {
         cartList = [];
@@ -87,7 +90,7 @@ class App extends Component {
       
     });
   }
-  // TODO: change this to work with new user/cart object in firebase storage
+
   addToCart = (product) => {
 
     let cartPath = `users/${this.state.user.uid}/cart`;

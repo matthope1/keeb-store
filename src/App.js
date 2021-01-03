@@ -30,8 +30,16 @@ class App extends Component {
   }
 
   componentDidMount() { 
-    // check to see if the user was already logged in from prev session
 
+    // variable that holds a reference to our database
+    const dbRef = firebase.database().ref();
+
+    // lists that will be populated with data from firebase
+    let productList = [];
+    let cartList = [];
+    let inventoryList = [];
+
+    // checks to see if the user was already logged in from prev session
     auth.onAuthStateChanged((user) => {
       if (user) {
         this.setState({ user });
@@ -53,14 +61,8 @@ class App extends Component {
       });
     }
 
-    // variable that holds a reference to our database
-    const dbRef = firebase.database().ref();
 
-    // lists that will be populated with data from firebase
-    let productList = [];
-    let cartList = [];
-    let inventoryList = [];
-
+    
     // event listener that will fire every time there is a change
     // in the firebase db
     dbRef.on('value', (response) => {

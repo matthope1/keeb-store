@@ -30,9 +30,7 @@ class App extends Component {
   }
 
   componentDidMount() { 
-
     // check to see if the user was already logged in from prev session
-
 
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -44,6 +42,9 @@ class App extends Component {
       auth.signInAnonymously()
       .then(() => {
         console.log("anon login")
+        // TODO:
+        // update firebase users list to include new users
+
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -64,8 +65,6 @@ class App extends Component {
     // in the firebase db
     dbRef.on('value', (response) => {
 
-      console.log("response:");
-      console.log(response.val());
       // for each product, entries will make an array with 2 elements
       // 0(index) being the key and 1(index) being the value
       productList =  Object.entries(response.val().products);
@@ -73,8 +72,12 @@ class App extends Component {
 
       // TODO: figure out how to structure data in firebase 
 
-      let cartQuery = Object.entries(response.val().users[this.state.user.uid].cart);
+
+      // let cartQuery = Object.entries(response.val().users[this.state.user.uid].cart);
       
+      let cartQuery = (response.val().users);
+      console.log(cartQuery);
+
       if (cartQuery) {
         cartList = cartQuery;
       }

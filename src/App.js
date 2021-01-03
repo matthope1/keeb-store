@@ -31,28 +31,36 @@ class App extends Component {
 
   componentDidMount() { 
 
-    // variable that holds a reference to our database
-    const dbRef = firebase.database().ref();
-
     // lists that will be populated with data from firebase
     let productList = [];
     let cartList = [];
     let inventoryList = [];
 
     // checks to see if the user was already logged in from prev session
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-      } 
-    });
+    // auth.onAuthStateChanged((user) => {
+    //   if (user) {
+
+    //     this.setState({ user });
+    //     let path = `users/${this.state.user.uid}`;
+    //     const dbRef = firebase.database().ref(path);
+
+    //     let itemToBeAdded = JSON.parse(`{ "itemsInCart" : 0 }`);
+    //     dbRef.push(itemToBeAdded);
+
+    //   } 
+    // });
     
     if (!(this.state.user)) {
       auth.signInAnonymously()
       .then(() => {
-        console.log("anon login")
-        // TODO:
-        // update firebase users list to include new users
-
+        console.log("anon login");
+        const dbRef = firebase.database().ref('users');
+        this.setState({user: auth.currentUser}, function() {
+          console.log("happens");
+          // TODO: fix this
+          let itemToBeAdded = `{ username : ${this.state.user.uid}}`;
+          dbRef.push(itemToBeAdded);
+        });
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -61,7 +69,8 @@ class App extends Component {
       });
     }
 
-
+    // variable that holds a reference to our database
+    const dbRef = firebase.database().ref();
     
     // event listener that will fire every time there is a change
     // in the firebase db
@@ -73,7 +82,6 @@ class App extends Component {
       inventoryList = Object.entries(response.val().inventory);
 
       // TODO: figure out how to structure data in firebase 
-
 
       // let cartQuery = Object.entries(response.val().users[this.state.user.uid].cart);
       

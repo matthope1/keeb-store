@@ -27,8 +27,8 @@ class Cart extends Component {
         const dbRef = firebase.database().ref(cartPath);
         let key = product[0];
 
-        console.log(product);
-        console.log(key);
+        // console.log(product);
+        // console.log(key);
         dbRef.child(key).remove();
     }
 

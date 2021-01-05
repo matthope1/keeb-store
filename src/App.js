@@ -12,7 +12,6 @@ import Header from './Header';
 import Footer from './Footer';
 import Product from './Product';
 
-
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
@@ -27,6 +26,15 @@ class App extends Component {
       pageLoading: true,
       user: null,
     }
+
+    this.writeUserData = this.writeUserData.bind(this);
+  }
+
+  writeUserData(userId) {
+    firebase.database().ref('users/' + userId).set({
+      uid : userId,
+      cart: [0],
+    });
   }
 
   componentDidMount() { 
@@ -53,13 +61,9 @@ class App extends Component {
     if (!(this.state.user)) {
       auth.signInAnonymously()
       .then(() => {
-        console.log("anon login");
-        const dbRef = firebase.database().ref('users');
         this.setState({user: auth.currentUser}, function() {
-          console.log("happens");
-          // TODO: fix this
-          let itemToBeAdded = `{ username : ${this.state.user.uid}}`;
-          dbRef.push(itemToBeAdded);
+          console.log("writing to fb...");
+          this.writeUserData(this.state.user.uid);
         });
       })
       .catch((error) => {

@@ -28,12 +28,19 @@ class App extends Component {
     }
 
     this.writeUserData = this.writeUserData.bind(this);
+    this.writeCartData = this.writeCartData.bind(this);
   }
 
   writeUserData(userId) {
     firebase.database().ref('users/' + userId).set({
       uid : userId,
       cart: [0],
+    });
+  }
+
+  writeCartData(userId, cartList) {
+    firebase.database().ref('users/' + userId).set( {
+      cartList 
     });
   }
 
@@ -44,6 +51,7 @@ class App extends Component {
     let cartList = [];
     let inventoryList = [];
 
+    // TODO: uncomment and test this 
     // checks to see if the user was already logged in from prev session
     // auth.onAuthStateChanged((user) => {
     //   if (user) {
@@ -73,11 +81,9 @@ class App extends Component {
       });
     }
 
-    // variable that holds a reference to our database
     const dbRef = firebase.database().ref();
-    
-    // event listener that will fire every time there is a change
-    // in the firebase db
+
+    // event listener that will fire every time there is a change in the rt db
     dbRef.on('value', (response) => {
 
       // for each product, entries will make an array with 2 elements
@@ -88,9 +94,9 @@ class App extends Component {
       // TODO: figure out how to structure data in firebase 
 
       // let cartQuery = Object.entries(response.val().users[this.state.user.uid].cart);
-      
-      let cartQuery = (response.val().users);
-      console.log(cartQuery);
+
+      // TODO: add error handling for this
+      let cartQuery = response.val().users[this.state.user.uid].cart;
 
       if (cartQuery) {
         cartList = cartQuery;
@@ -110,13 +116,13 @@ class App extends Component {
 
   addToCart = (product) => {
 
+    // TODO: update this function to work with new cart db structure
+
     let cartPath = `users/${this.state.user.uid}/cart`;
     const dbRef = firebase.database().ref(cartPath);
-
     let productName = product[0];
     let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;
     let productDataObj = (productDataString);
-
     let itemToBeAdded = JSON.parse(`{ "${productName}" : ${productDataObj} }` );
 
     dbRef.push(itemToBeAdded);

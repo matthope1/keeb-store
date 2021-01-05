@@ -26,9 +26,6 @@ class Cart extends Component {
         let cartPath = `users/${this.props.userInfo.uid}/cart`;
         const dbRef = firebase.database().ref(cartPath);
         let key = product[0];
-
-        // console.log(product);
-        // console.log(key);
         dbRef.child(key).remove();
     }
 
@@ -42,6 +39,7 @@ class Cart extends Component {
                         <a href="#" className="slide-out-cart__exit-btn" onClick={this.handleClick}>x</a>
                         <p>You have {this.props.cartList.length} item(s) in your cart!</p>
                         <hr /> 
+                        {/* TODO: update this to work with new cart db structure */}
                         {this.props.cartList.map((product, i) => {
 
                             let name = Object.keys(product[1]);

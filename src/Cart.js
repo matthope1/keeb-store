@@ -39,7 +39,7 @@ class Cart extends Component {
                         <a href="#" className="slide-out-cart__exit-btn" onClick={this.handleClick}>x</a>
                         <p>You have {this.props.cartList.length} item(s) in your cart!</p>
                         <hr /> 
-                        {/* TODO: update this to work with new cart db structure */}
+                        {/* TODO: update this to work with new cart db structure
                         {this.props.cartList.map((product, i) => {
 
                             let name = Object.keys(product[1]);
@@ -53,7 +53,7 @@ class Cart extends Component {
                                     <Product removeFromCart={() => this.removeFromCart(product)} key={key} name={name} productInfo={productInfo} />
                                 </div>
                             )
-                        })}
+                        })} */}
                         <div className="cart-info">
                             <hr/>
                             <p>Your order total = ${total} </p>

@@ -150,31 +150,6 @@ class App extends Component {
     return filteredProds;
   }
 
-  // login = () => {
-  //   auth.signInWithPopup(provider) 
-  //     .then((result) => {
-  //       const user = result.user;
-  //       this.setState({
-  //         user
-  //       });
-  //     }).catch(function(error){
-  //       var errorCode = error.code;
-  //       console.log(errorCode);
-  //     });
-  // }
-
-  // logout  = () => {
-  //   auth.signOut()
-  //     .then(() => {
-  //       this.setState({
-  //         user: null
-  //       });
-  //     }).catch(function(error){
-  //       var errorCode = error.code;
-  //       console.log(errorCode);
-  //     });
-  // }
-
   render (){
 
     if (this.state.pageLoading) {

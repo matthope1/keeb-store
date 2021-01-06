@@ -91,17 +91,9 @@ class App extends Component {
       productList =  Object.entries(response.val().products);
       inventoryList = Object.entries(response.val().inventory);
 
-      // TODO: figure out how to structure data in firebase 
-
-      // let cartQuery = Object.entries(response.val().users[this.state.user.uid].cart);
-
-      // TODO: add error handling for this
-      let cartQuery = response.val().users[this.state.user.uid].cart;
-
-      if (cartQuery) {
-        cartList = cartQuery;
-      }
-      else {
+      if (this.state.user.uid) {
+        cartList = response.val().users[this.state.user.uid].cart;
+      } else {
         cartList = [];
       }
 

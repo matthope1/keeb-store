@@ -12,7 +12,8 @@ import Header from './Header';
 import Footer from './Footer';
 import Product from './Product';
 
-const provider = new firebase.auth.GoogleAuthProvider();
+// const provider = new firebase.auth.GoogleAuthProvider();
+
 const auth = firebase.auth();
 
 class App extends Component {
@@ -38,11 +39,13 @@ class App extends Component {
     });
   }
 
-  writeCartData(userId, cartList) {
-    firebase.database().ref('users/' + userId).set( {
-      cartList 
-    });
-  }
+  writeCartData(userId, product) {
+    let cartPath;
+    cartPath = `users/${userId}/cart`;
+    firebase.database().ref(cartPath).set({
+        product
+      });
+  };
 
   componentDidMount() { 
 
@@ -70,7 +73,6 @@ class App extends Component {
       auth.signInAnonymously()
       .then(() => {
         this.setState({user: auth.currentUser}, function() {
-          console.log("writing to fb...");
           this.writeUserData(this.state.user.uid);
         });
       })
@@ -88,6 +90,7 @@ class App extends Component {
 
       // for each product, entries will make an array with 2 elements
       // 0(index) being the key and 1(index) being the value
+      console.log(response);
       productList =  Object.entries(response.val().products);
       inventoryList = Object.entries(response.val().inventory);
 
@@ -107,19 +110,22 @@ class App extends Component {
   }
 
   addToCart = (product) => {
-
-    // TODO: update this function to work with new cart db structure
-
-    let cartPath = `users/${this.state.user.uid}/cart`;
-    const dbRef = firebase.database().ref(cartPath);
+    let cartPath;
+    let uid = this.state.user.uid;
     let productName = product[0];
     let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;
-    let productDataObj = (productDataString);
-    let itemToBeAdded = JSON.parse(`{ "${productName}" : ${productDataObj} }` );
+    let productObj = JSON.parse(`{ "${productName}" : ${productDataString} }` );
 
-    dbRef.push(itemToBeAdded);
+    console.log("add to cart was called");
+
+    if (uid) {
+      cartPath = `users/${this.state.user.uid}/cart`;
+      this.writeCartData(uid,productObj);
+    }
+    else {
+      console.log("there was a problem adding to the cart");
+    }
   }
-
 
   orderBySelection = (event) => {
     event.preventDefault();
@@ -141,34 +147,33 @@ class App extends Component {
         return product;
       }
     })
-    
     return filteredProds;
   }
 
-  login = () => {
-    auth.signInWithPopup(provider) 
-      .then((result) => {
-        const user = result.user;
-        this.setState({
-          user
-        });
-      }).catch(function(error){
-        var errorCode = error.code;
-        console.log(errorCode);
-      });
-  }
+  // login = () => {
+  //   auth.signInWithPopup(provider) 
+  //     .then((result) => {
+  //       const user = result.user;
+  //       this.setState({
+  //         user
+  //       });
+  //     }).catch(function(error){
+  //       var errorCode = error.code;
+  //       console.log(errorCode);
+  //     });
+  // }
 
-  logout  = () => {
-    auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null
-        });
-      }).catch(function(error){
-        var errorCode = error.code;
-        console.log(errorCode);
-      });
-  }
+  // logout  = () => {
+  //   auth.signOut()
+  //     .then(() => {
+  //       this.setState({
+  //         user: null
+  //       });
+  //     }).catch(function(error){
+  //       var errorCode = error.code;
+  //       console.log(errorCode);
+  //     });
+  // }
 
   render (){
 

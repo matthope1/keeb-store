@@ -30,21 +30,43 @@ class App extends Component {
 
     this.writeUserData = this.writeUserData.bind(this);
     this.writeCartData = this.writeCartData.bind(this);
+    this.readCartData = this.readCartData.bind(this);
   }
 
   writeUserData(userId) {
     firebase.database().ref('users/' + userId).set({
       uid : userId,
-      cart: [0],
+      // cart: [],
     });
   }
 
+  readCartData(userId) {
+    let cartRef = firebase.database().ref('users/' + userId + '/cart');
+    let data;
+
+    cartRef.on('value', (snapshot) => {
+      data = snapshot.val();
+    });
+
+    return data;
+  }
+
   writeCartData(userId, product) {
+    // if there is, then copy that data and add new product
+
+    let cartData = this.readCartData(userId);
     let cartPath;
-    cartPath = `users/${userId}/cart`;
-    firebase.database().ref(cartPath).set({
-        product
+
+    if (cartData) {
+      // TODO: copy the data currently in cart and add new product
+      console.log(cartData);
+    }
+    else {
+      cartPath = `users/${userId}/cart`;
+        firebase.database().ref(cartPath).set({
+          product
       });
+    }
   };
 
   componentDidMount() { 
@@ -55,19 +77,16 @@ class App extends Component {
     let inventoryList = [];
 
     // TODO: uncomment and test this 
-    // checks to see if the user was already logged in from prev session
-    // auth.onAuthStateChanged((user) => {
-    //   if (user) {
-
-    //     this.setState({ user });
-    //     let path = `users/${this.state.user.uid}`;
-    //     const dbRef = firebase.database().ref(path);
-
-    //     let itemToBeAdded = JSON.parse(`{ "itemsInCart" : 0 }`);
-    //     dbRef.push(itemToBeAdded);
-
-    //   } 
-    // });
+    // check to see if the user was already logged in from prev session
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({ user });
+        // let path = `users/${this.state.user.uid}`;
+        // const dbRef = firebase.database().ref(path);
+        // let itemToBeAdded = JSON.parse(`{ "itemsInCart" : 0 }`);
+        // dbRef.push(itemToBeAdded);
+      } 
+    });
     
     if (!(this.state.user)) {
       auth.signInAnonymously()
@@ -90,7 +109,6 @@ class App extends Component {
 
       // for each product, entries will make an array with 2 elements
       // 0(index) being the key and 1(index) being the value
-      console.log(response);
       productList =  Object.entries(response.val().products);
       inventoryList = Object.entries(response.val().inventory);
 

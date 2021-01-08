@@ -39,8 +39,8 @@ class Cart extends Component {
                         <a href="#" className="slide-out-cart__exit-btn" onClick={this.handleClick}>x</a>
                         <p>You have {this.props.cartList.length} item(s) in your cart!</p>
                         <hr /> 
-                        {/* TODO: update this to work with new cart db structure
-                        {this.props.cartList.map((product, i) => {
+                        {/* TODO: update this to work with new cart db structure */}
+                        {/* {this.props.cartList.map((product, i) => {
 
                             let name = Object.keys(product[1]);
                             let productInfo = product[1][Object.keys(product[1])];
@@ -68,7 +68,7 @@ class Cart extends Component {
                     <a href="">
                         <i className="fas fa-shopping-cart cart-icon" onClick={this.handleClick}></i> 
                     </a>
-                    <p>{this.props.cartList.length}</p>
+                    {/* <p>{this.props.cartList.length}</p> */}
                 </div>
             )
         }

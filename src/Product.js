@@ -18,11 +18,11 @@ class Product extends Component {
       )
     } else {
       return (
-          <div className="product" >
-            <h1>{ name }  ${ price } </h1>    
-            <img className="img" src={url} alt={type} />
-            <button onClick={this.props.removeFromCart}> Remove from cart</button>
-          </div>
+        <div className="product" >
+          <h1>{ name }  ${ price } </h1>    
+          <img className="img" src={url} alt={type} />
+          <button onClick={this.props.removeFromCart}> Remove from cart</button>
+        </div>
       )
     }
   }

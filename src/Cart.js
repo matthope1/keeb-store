@@ -20,11 +20,27 @@ class Cart extends Component {
   }
 
   // TODO: change this to work with new users/cart object in firebase
-  removeFromCart = (product) => {
+  removeFromCart = (key) => {
     let cartPath = `users/${this.props.userInfo.uid}/cart`;
-    const dbRef = firebase.database().ref(cartPath);
-    let key = product[0];
-    dbRef.child(key).remove();
+    let userPath = `users/${this.props.userInfo.uid}`
+    let data;
+    let cart;
+
+    const cartRef = firebase.database().ref(cartPath);
+    const userRef = firebase.database().ref(userPath);
+
+    cartRef.child(key).remove();
+
+    cartRef.on('value', (snapshot) => {
+      data = snapshot.val();
+      console.log("remove from cart read cart data", data)
+      data.numOfProducts--
+      cart = data
+    });
+
+    userRef.set({
+      cart
+    })
   }
 
   render() {
@@ -37,7 +53,7 @@ class Cart extends Component {
             <a href="#" className="slide-out-cart__exit-btn" onClick={this.handleClick}>x</a>
             
             {(this.props.cartList && this.props.cartList.length) && (
-              <p>You have {this.props.cartList.length} item(s) in your cart!</p>
+              <p>You have {this.props.cartList.length - 1} item(s) in your cart!</p>
             )}
             
             <hr /> 
@@ -58,7 +74,7 @@ class Cart extends Component {
 
                 return (
                     <div>
-                        <Product removeFromCart={() => this.removeFromCart(product)} key={key} name={name} productInfo={productInfo} />
+                        <Product removeFromCart={() => this.removeFromCart(key)} key={key} name={name} productInfo={productInfo} />
                     </div>
                 )
               }

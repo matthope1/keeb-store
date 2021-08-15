@@ -34,18 +34,51 @@ class App extends Component {
   }
 
   writeUserData(userId) {
-    firebase.database().ref('users/' + userId).set({
-      uid : userId,
-      // cart: [],
-    });
+
+    const ref = firebase.database().ref('users/')
+    let numOfUsers 
+
+    // TODO: get the current num of users, add new user according to user # 
+    // increment the numOfUsers attribute in the users object
+    // TODO:
+
+    ref.on('value', (snapshot) => {
+      numOfUsers = snapshot.val().numOfUsers
+
+      console.log("write user data snapshot.val(): ", snapshot.val())
+      
+      // TODO: if user does not exist in users
+      if(!(userId in snapshot.val())) {
+        console.log("user does not exist in db")
+        console.log("num of users", numOfUsers)
+        // increment current num of users
+        firebase.database().ref('users/').set({
+          numOfUsers
+        })
+
+        firebase.database().ref('users/' + userId).set({
+        // firebase.database().ref('users/').set({
+          uid : userId,
+        });
+      } else {
+        console.log("num of users", numOfUsers)
+        console.log("user does exist in db")
+      }
+    }, (errorObject) => {
+      console.log("the read failed", errorObject)
+    })
+
+
   }
 
   readCartData(userId) {
-    let cartRef = firebase.database().ref('users/' + userId + '/cart');
+    let cartPath = `users/${userId}/cart`;
+    let cartRef = firebase.database().ref(cartPath);
     let data;
 
     cartRef.on('value', (snapshot) => {
       data = snapshot.val();
+      console.log("read cart data", data)
     });
 
     return data;
@@ -53,24 +86,33 @@ class App extends Component {
 
   writeCartData(userId, product) {
     // if there is, then copy that data and add new product
-
     let cartData = this.readCartData(userId);
-    let cartPath;
+    let cartPath = `users/${userId}/cart`;
+    let userPath = `users/${userId}`
 
     if (cartData) {
-      // TODO: copy the data currently in cart and add new product
-      console.log(cartData);
+      // console.log("Write cart data", cartData);
+      // console.log("product", product)
+
+      let numItemsInCart = cartData.numOfProducts;
+      cartData[numItemsInCart] = product
+      cartData.numOfProducts++
+      let cart = cartData
+
+      console.log("newCartData", cartData)
+      firebase.database().ref(userPath).set({
+        cart
+      })
     }
     else {
-      cartPath = `users/${userId}/cart`;
-        firebase.database().ref(cartPath).set({
-          product
+      firebase.database().ref(cartPath).set({
+        0: product,
+        numOfProducts: 1 
       });
     }
   };
 
   componentDidMount() { 
-
     // lists that will be populated with data from firebase
     let productList = [];
     let cartList = [];
@@ -78,21 +120,42 @@ class App extends Component {
 
     // TODO: uncomment and test this 
     // check to see if the user was already logged in from prev session
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ user });
-        // let path = `users/${this.state.user.uid}`;
-        // const dbRef = firebase.database().ref(path);
-        // let itemToBeAdded = JSON.parse(`{ "itemsInCart" : 0 }`);
-        // dbRef.push(itemToBeAdded);
-      } 
-    });
+
+    // auth.onAuthStateChanged((user) => {
+    //   if (user) {
+    //     this.setState({ user });
+
+    //     // console.log("user from prev session", user)
+
+    //     // let path = `users/${this.state.user.uid}`;
+    //     // const dbRef = firebase.database().ref(path);
+    //     // let itemToBeAdded = JSON.parse(`{ "itemsInCart" : 0 }`);
+    //     // dbRef.push(itemToBeAdded);
+    //   } 
+    // });
     
+    const dbRef = firebase.database().ref()
+    const userDbRef = firebase.database().ref('users/')
+
     if (!(this.state.user)) {
       auth.signInAnonymously()
       .then(() => {
-        this.setState({user: auth.currentUser}, function() {
+        this.setState({user: auth.currentUser}, () => {
+          // TODO: do we want to write user data here or read?
+
+          // try {
+          //   userDbRef.set({
+          //     id: auth.currentUser.uid
+          //   })
+          // } catch(err) {
+          //   console.log("There was an error:", err)
+          // }
+
           this.writeUserData(this.state.user.uid);
+          let cartData = this.readCartData(this.state.user.uid)
+  
+          // console.log("user id", this.state.user.uid)
+          // console.log("cart data", cartData)
         });
       })
       .catch((error) => {
@@ -102,18 +165,39 @@ class App extends Component {
       });
     }
 
-    const dbRef = firebase.database().ref();
 
-    // event listener that will fire every time there is a change in the rt db
+    // event listener that will fire every time there is a change in the firebase real time db
+    // We don't want to reset state every time there's a change in the db
+    // this will reset everyones state
+    // We likely just  want to listen for changes for that particular user
+
     dbRef.on('value', (response) => {
+
+      console.log("there was a change in the database: ", response)
 
       // for each product, entries will make an array with 2 elements
       // 0(index) being the key and 1(index) being the value
       productList =  Object.entries(response.val().products);
       inventoryList = Object.entries(response.val().inventory);
 
-      if (this.state.user.uid) {
+      // console.log("productList", productList)
+      // console.log("inventoryList", inventoryList)
+
+      // console.log("users", response.val().users)
+
+      // TODO: update this to work with new cart structure
+
+      if (this.state.user.uid && response.val().users && response.val().users[this.state.user.uid]) {
         cartList = response.val().users[this.state.user.uid].cart;
+        if (cartList) {
+          let newList = Object.values(cartList)
+          console.log("cartList", Object.values(cartList))
+          // console.log(newList[0])
+          cartList = newList
+        } else {
+          cartList = [];
+        }
+
       } else {
         cartList = [];
       }
@@ -134,7 +218,7 @@ class App extends Component {
     let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;
     let productObj = JSON.parse(`{ "${productName}" : ${productDataString} }` );
 
-    console.log("add to cart was called");
+    console.log("add to cart was called, product:", product);
 
     if (uid) {
       cartPath = `users/${this.state.user.uid}/cart`;
@@ -180,7 +264,7 @@ class App extends Component {
     else {
 
       let productsList = [...this.state.products];
-      //filter the displayed produducts based on user input
+      //filter the displayed products based on user input
       let filteredProds = this.getFilteredProds(productsList);
 
       return (
@@ -200,7 +284,6 @@ class App extends Component {
           </div>
 
           <div id="products" className="products-flex wrapper">
-           
             {filteredProds.map((product) => {
               return (
                 <Product 
@@ -211,7 +294,6 @@ class App extends Component {
                 />
               )
             })}
-
           </div>
 
           <Footer/>

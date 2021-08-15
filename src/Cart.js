@@ -28,21 +28,31 @@ class Cart extends Component {
   }
 
   render() {
-    if (this.state.cartSlideOut){
+    if (this.state.cartSlideOut ){
       //slide out cart display
       let total = 0;
       return (
         <div className="slide-out-cart">
           <div className="slide-out-cart-container">
             <a href="#" className="slide-out-cart__exit-btn" onClick={this.handleClick}>x</a>
-            <p>You have {this.props.cartList.length} item(s) in your cart!</p>
+            
+            {(this.props.cartList && this.props.cartList.length) && (
+              <p>You have {this.props.cartList.length} item(s) in your cart!</p>
+            )}
+            
             <hr /> 
             {/* TODO: update this to work with new cart db structure */}
-            {/* {this.props.cartList.map((product, i) => {
+            {this.props.cartList.map((product, i) => {
+              // ignore product count in cart
+              if (isNaN(product)) {
+                // console.log(`product #: ${i}: ${product}`)
+                // console.log("keys",Object.keys(product))
+                console.log("values",Object.values(product));
 
-                let name = Object.keys(product[1]);
-                let productInfo = product[1][Object.keys(product[1])];
+                let name = Object.keys(product);
+                let productInfo = Object.values(product)[0];
                 let key = i;
+                console.log("product  info", productInfo)
 
                 total = total + parseInt(productInfo.price);
 
@@ -51,7 +61,8 @@ class Cart extends Component {
                         <Product removeFromCart={() => this.removeFromCart(product)} key={key} name={name} productInfo={productInfo} />
                     </div>
                 )
-            })} */}
+              }
+            })}
             <div className="cart-info">
                 <hr/>
                 <p>Your order total = ${total} </p>

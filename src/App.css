@@ -147,6 +147,7 @@ a {
 .slide-out-cart-container {
   position: relative;
   height: 100%;
+  overflow-y: scroll;
 }
 
 .cart-info {

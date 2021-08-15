@@ -19,7 +19,8 @@ class Cart extends Component {
     })
   }
 
-  // TODO: change this to work with new users/cart object in firebase
+  // TODO: we cant use the key to remove items from cart because the number of items
+  // inside of the cart list will change 
   removeFromCart = (key) => {
     let cartPath = `users/${this.props.userInfo.uid}/cart`;
     let userPath = `users/${this.props.userInfo.uid}`

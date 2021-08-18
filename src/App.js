@@ -8,6 +8,8 @@ import firebase from './firebase';
 import 'firebase/auth';
 import './App.css';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import Header from './Header';
 import Footer from './Footer';
 import Product from './Product';
@@ -22,6 +24,7 @@ class App extends Component {
     this.state = {
       products: [],
       cart: [],
+      cartObj: {},
       inventory: [],
       orderBy: 'all',
       pageLoading: true,
@@ -89,15 +92,19 @@ class App extends Component {
     let cartData = this.readCartData(userId);
     let cartPath = `users/${userId}/cart`;
     let userPath = `users/${userId}`
+    let cart
+
+    let id = uuidv4()
 
     if (cartData) {
       // console.log("Write cart data", cartData);
       // console.log("product", product)
 
       let numItemsInCart = cartData.numOfProducts;
-      cartData[numItemsInCart] = product
+      // cartData[numItemsInCart] = product
+      cartData[id] = product
       cartData.numOfProducts++
-      let cart = cartData
+      cart = cartData
 
       console.log("newCartData", cartData)
       firebase.database().ref(userPath).set({
@@ -105,10 +112,22 @@ class App extends Component {
       })
     }
     else {
-      firebase.database().ref(cartPath).set({
-        0: product,
+      cart = {
         numOfProducts: 1 
-      });
+      }
+
+      cart[id] = product
+
+      firebase.database().ref(userPath).set({
+        cart
+      })
+
+      // firebase.database().ref(cartPath).set({
+      //   id: product,
+      //   // 0: product,
+      //   numOfProducts: 1 
+      // });
+
     }
   };
 
@@ -116,6 +135,7 @@ class App extends Component {
     // lists that will be populated with data from firebase
     let productList = [];
     let cartList = [];
+    let cartObj = {};
     let inventoryList = [];
 
     // TODO: uncomment and test this 
@@ -187,11 +207,16 @@ class App extends Component {
 
       // TODO: update this to work with new cart structure
 
-      if (this.state.user.uid && response.val().users && response.val().users[this.state.user.uid]) {
+      if (this.state.user && this.state.user.uid && response.val().users && response.val().users[this.state.user.uid]) {
         cartList = response.val().users[this.state.user.uid].cart;
+        cartObj = response.val().users[this.state.user.uid].cart;
+
         if (cartList) {
           let newList = Object.values(cartList)
           console.log("cartList", Object.values(cartList))
+          console.log("cart list keys", Object.keys(cartList))
+
+          console.log("cart list first item", cartList[Object.keys(cartList)[0]])
           // console.log(newList[0])
           cartList = newList
         } else {
@@ -205,6 +230,7 @@ class App extends Component {
       this.setState({
         products: productList,
         cart: cartList,
+        cartObj: cartObj,
         pageLoading: false
       })
       

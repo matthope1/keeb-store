@@ -32,9 +32,11 @@ class Cart extends Component {
 
     cartRef.child(key).remove();
 
+    console.log("key", key)
+
     cartRef.on('value', (snapshot) => {
       data = snapshot.val();
-      console.log("remove from cart read cart data", data)
+      // console.log("remove from cart read cart data", data)
       data.numOfProducts--
       cart = data
     });
@@ -58,31 +60,31 @@ class Cart extends Component {
             )}
             
             <hr /> 
-            {/* TODO: update this to work with new cart db structure */}
             {this.props.cartList.map((product, i) => {
+              // console.log("cart list", this.props.cartList)
+
               // ignore product count in cart
               if (isNaN(product)) {
-                // console.log(`product #: ${i}: ${product}`)
+                console.log(`product #: ${i}: ${product}`)
                 // console.log("keys",Object.keys(product))
-                console.log("values",Object.values(product));
 
                 let name = Object.keys(product);
                 let productInfo = Object.values(product)[0];
-                let key = i;
-                console.log("product  info", productInfo)
+
+                let key = this.props.cartKeys[i]
 
                 total = total + parseInt(productInfo.price);
 
                 return (
-                    <div>
-                        <Product removeFromCart={() => this.removeFromCart(key)} key={key} name={name} productInfo={productInfo} />
-                    </div>
+                  <div>
+                    <Product removeFromCart={() => this.removeFromCart(key)} key={key} name={name} productInfo={productInfo} />
+                  </div>
                 )
               }
             })}
             <div className="cart-info">
-                <hr/>
-                <p>Your order total = ${total} </p>
+              <hr/>
+              <p>Your order total = ${total} </p>
             </div>
           </div> 
         </div>

@@ -48,12 +48,13 @@ class App extends Component {
     ref.on('value', (snapshot) => {
       numOfUsers = snapshot.val().numOfUsers
 
-      console.log("write user data snapshot.val(): ", snapshot.val())
+      // console.log("write user data snapshot.val(): ", snapshot.val())
       
       // TODO: if user does not exist in users
       if(!(userId in snapshot.val())) {
-        console.log("user does not exist in db")
-        console.log("num of users", numOfUsers)
+        // console.log("user does not exist in db")
+        // console.log("num of users", numOfUsers)
+
         // increment current num of users
         firebase.database().ref('users/').set({
           numOfUsers
@@ -64,14 +65,12 @@ class App extends Component {
           uid : userId,
         });
       } else {
-        console.log("num of users", numOfUsers)
+        // console.log("num of users", numOfUsers)
         console.log("user does exist in db")
       }
     }, (errorObject) => {
       console.log("the read failed", errorObject)
     })
-
-
   }
 
   readCartData(userId) {
@@ -81,7 +80,7 @@ class App extends Component {
 
     cartRef.on('value', (snapshot) => {
       data = snapshot.val();
-      console.log("read cart data", data)
+      // console.log("read cart data", data)
     });
 
     return data;
@@ -135,6 +134,7 @@ class App extends Component {
     // lists that will be populated with data from firebase
     let productList = [];
     let cartList = [];
+    let cartListKeys;
     let cartObj = {};
     let inventoryList = [];
 
@@ -209,15 +209,16 @@ class App extends Component {
 
       if (this.state.user && this.state.user.uid && response.val().users && response.val().users[this.state.user.uid]) {
         cartList = response.val().users[this.state.user.uid].cart;
-        cartObj = response.val().users[this.state.user.uid].cart;
+        cartObj = cartList
+
 
         if (cartList) {
           let newList = Object.values(cartList)
-          console.log("cartList", Object.values(cartList))
-          console.log("cart list keys", Object.keys(cartList))
+          let cartListValues = Object.values(cartList)
+          cartListKeys = Object.keys(cartList)
 
-          console.log("cart list first item", cartList[Object.keys(cartList)[0]])
-          // console.log(newList[0])
+          console.log("cart List", cartList)
+
           cartList = newList
         } else {
           cartList = [];
@@ -230,6 +231,7 @@ class App extends Component {
       this.setState({
         products: productList,
         cart: cartList,
+        cartKeys: cartListKeys,
         cartObj: cartObj,
         pageLoading: false
       })
@@ -244,7 +246,7 @@ class App extends Component {
     let productDataString = `{ "price": ${product[1].price}, "type": "${product[1].type}", "url": "${product[1].url}" }`;
     let productObj = JSON.parse(`{ "${productName}" : ${productDataString} }` );
 
-    console.log("add to cart was called, product:", product);
+    // console.log("add to cart was called, product:", product);
 
     if (uid) {
       cartPath = `users/${this.state.user.uid}/cart`;
@@ -295,7 +297,7 @@ class App extends Component {
 
       return (
         <div className="App">
-          <Header cartList={this.state.cart} removeFromCart={this.removeFromCart} userInfo={this.state.user}/>
+          <Header cartList={this.state.cart} cartKeys={this.state.cartKeys} cartObj={this.state.cartObj} removeFromCart={this.removeFromCart} userInfo={this.state.user}/>
           {this.state.user ? <button onClick={this.logout}>Log Out</button> : <button onClick={this.login}>Log In</button>}
           <div className="header-background">
             <button><a href="#order-by">Enter store</a></button>

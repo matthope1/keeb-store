@@ -19,42 +19,72 @@ class Cart extends Component {
     })
   }
 
-  // TODO: change this to work with new users/cart object in firebase
-  removeFromCart = (product) => {
+  // TODO: we cant use the key to remove items from cart because the number of items
+  // inside of the cart list will change 
+  removeFromCart = (key) => {
     let cartPath = `users/${this.props.userInfo.uid}/cart`;
-    const dbRef = firebase.database().ref(cartPath);
-    let key = product[0];
-    dbRef.child(key).remove();
+    let userPath = `users/${this.props.userInfo.uid}`
+    let data;
+    let cart;
+
+    const cartRef = firebase.database().ref(cartPath);
+    const userRef = firebase.database().ref(userPath);
+
+    cartRef.child(key).remove();
+
+    console.log("key", key)
+
+    cartRef.on('value', (snapshot) => {
+      data = snapshot.val();
+      // console.log("remove from cart read cart data", data)
+      data.numOfProducts--
+      cart = data
+    });
+
+    userRef.set({
+      cart
+    })
   }
 
   render() {
-    if (this.state.cartSlideOut){
+    if (this.state.cartSlideOut ){
       //slide out cart display
       let total = 0;
       return (
         <div className="slide-out-cart">
           <div className="slide-out-cart-container">
             <a href="#" className="slide-out-cart__exit-btn" onClick={this.handleClick}>x</a>
-            <p>You have {this.props.cartList.length} item(s) in your cart!</p>
+            
+            {(this.props.cartList && this.props.cartList.length) && (
+              <p>You have {this.props.cartList.length - 1} item(s) in your cart!</p>
+            )}
+            
             <hr /> 
-            {/* TODO: update this to work with new cart db structure */}
-            {/* {this.props.cartList.map((product, i) => {
+            {this.props.cartList.map((product, i) => {
+              // console.log("cart list", this.props.cartList)
 
-                let name = Object.keys(product[1]);
-                let productInfo = product[1][Object.keys(product[1])];
-                let key = i;
+              // ignore product count in cart
+              if (isNaN(product)) {
+                console.log(`product #: ${i}: ${product}`)
+                // console.log("keys",Object.keys(product))
+
+                let name = Object.keys(product);
+                let productInfo = Object.values(product)[0];
+
+                let key = this.props.cartKeys[i]
 
                 total = total + parseInt(productInfo.price);
 
                 return (
-                    <div>
-                        <Product removeFromCart={() => this.removeFromCart(product)} key={key} name={name} productInfo={productInfo} />
-                    </div>
+                  <div>
+                    <Product removeFromCart={() => this.removeFromCart(key)} key={key} name={name} productInfo={productInfo} />
+                  </div>
                 )
-            })} */}
+              }
+            })}
             <div className="cart-info">
-                <hr/>
-                <p>Your order total = ${total} </p>
+              <hr/>
+              <p>Your order total = ${total} </p>
             </div>
           </div> 
         </div>

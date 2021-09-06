@@ -10,7 +10,7 @@ class Product extends Component {
     // then give it an add to cart buttton
     if (this.props.addToCart) {
       return (
-        <div className="product" >
+        <div className="product">
           <h1>{ name }  ${ price } </h1>    
           <img className="img" src={url} alt={type} />
           <button onClick={this.props.addToCart}> Add to cart</button>
@@ -18,7 +18,7 @@ class Product extends Component {
       )
     } else {
       return (
-        <div className="product" >
+        <div className="product">
           <h1>{ name }  ${ price } </h1>    
           <img className="img" src={url} alt={type} />
           <button onClick={this.props.removeFromCart}> Remove from cart</button>

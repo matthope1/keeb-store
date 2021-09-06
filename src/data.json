@@ -1,0 +1,124 @@
+{
+    "users" : {
+        "numOfUsers": 0
+    },
+    "products": {
+        "womier": {
+            "price": 80,
+            "name": "womier",
+            "type": "keyboard",
+            "url": "http://matthopecodes.com/project-five-assets/womier.jpg"
+        },
+        "skPink": {
+            "name": "skPink",
+            "price": 60,
+            "type": "keyboard",
+            "url": "http://matthopecodes.com/project-five-assets/skPink2.jpg"
+        },
+        "skGrey": {
+            "name": "skGrey",
+            "price": 60,
+            "type": "keyboard",
+            "url": "http://matthopecodes.com/project-five-assets/skGrey2.jpg"
+        },
+        "blackCase": {
+            "name": "blackCase",
+            "price": 50,
+            "type": "case",
+            "url":"http://matthopecodes.com/project-five-assets/blackCase.jpg"
+        },
+        "blueCase": {
+            "name": "blueCase",
+            "price": 50,
+            "type": "case",
+            "url":"http://matthopecodes.com/project-five-assets/blueCase.jpg"
+        },
+        "redCase": {
+            "name": "redCase",
+            "price": 50,
+            "type": "case",
+            "url":"http://matthopecodes.com/project-five-assets/redCase.jpg"
+        },
+        "owlCap": {
+            "name": "owlCap",
+            "price": 30,
+            "type": "keycap",
+            "url": "http://matthopecodes.com/project-five-assets/keycaps2.jpg"
+        },
+       "drinkCap": {
+            "name": "drinkCap",
+            "price": 30,
+            "type": "keycap",
+            "url": "http://matthopecodes.com/project-five-assets/keycaps3.jpg"
+        },
+       "greyCaps": {
+            "name": "greyCaps",
+            "price": 60,
+            "type": "keycap",
+            "url": "http://matthopecodes.com/project-five-assets/keycaps1.jpg"
+        },
+        "sherbet": {
+            "name": "sherbet",
+            "price": 3,
+            "type": "switch",
+            "url": "http://matthopecodes.com/project-five-assets/switch1.jpg"
+        },
+        "blueberry": {
+            "name": "blueberry",
+            "price": 3,
+            "type": "switch",
+            "url": "http://matthopecodes.com/project-five-assets/switch2.jpg"
+        },
+        "pink": {
+            "name": "pink",
+            "price": 3,
+            "type": "switch",
+            "url": "http://matthopecodes.com/project-five-assets/switch3.jpg"
+        }
+
+    },
+
+    "inventory": {
+
+       "womier": {
+            "quantity": 13
+        },
+        "skPink": {
+            "quantity": 10
+        },
+        "skGrey": {
+            "quantity": 9
+        },
+        "blackCase": {
+            "quantity": 15
+        },
+        "blueCase": {
+            "quantity": 23
+        },
+        "redCase": {
+            "quantity": 7
+        },
+        "owlCap": {
+            "quantity": 9
+        },
+        "drinkCap": {
+            "quantity": 2
+        },
+        "greyCaps": {
+            "quantity": 0
+        },
+        "sherbet": {
+            "quantity": 105
+        },
+        "blueberry": {
+            "quantity": 204
+        },
+        "pink": {
+            "quantity": 303
+        }
+    },
+
+    "cart" : {
+        
+    }
+}

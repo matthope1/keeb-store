@@ -1,13 +1,20 @@
 {
-  "main.css": "/keeb-store/static/css/main.bfb334a0.chunk.css",
-  "main.js": "/keeb-store/static/js/main.f32ac3a4.chunk.js",
-  "main.js.map": "/keeb-store/static/js/main.f32ac3a4.chunk.js.map",
-  "runtime~main.js": "/keeb-store/static/js/runtime~main.03f28ec2.js",
-  "runtime~main.js.map": "/keeb-store/static/js/runtime~main.03f28ec2.js.map",
-  "static/js/2.470eeb94.chunk.js": "/keeb-store/static/js/2.470eeb94.chunk.js",
-  "static/js/2.470eeb94.chunk.js.map": "/keeb-store/static/js/2.470eeb94.chunk.js.map",
-  "index.html": "/keeb-store/index.html",
-  "precache-manifest.1622a631cebb6de7f58d2f6850abb065.js": "/keeb-store/precache-manifest.1622a631cebb6de7f58d2f6850abb065.js",
-  "service-worker.js": "/keeb-store/service-worker.js",
-  "static/css/main.bfb334a0.chunk.css.map": "/keeb-store/static/css/main.bfb334a0.chunk.css.map"
+  "files": {
+    "main.css": "/keeb-store/static/css/main.28b02948.chunk.css",
+    "main.js": "/keeb-store/static/js/main.87954fbf.chunk.js",
+    "main.js.map": "/keeb-store/static/js/main.87954fbf.chunk.js.map",
+    "runtime-main.js": "/keeb-store/static/js/runtime-main.9888f713.js",
+    "runtime-main.js.map": "/keeb-store/static/js/runtime-main.9888f713.js.map",
+    "static/js/2.13f2c532.chunk.js": "/keeb-store/static/js/2.13f2c532.chunk.js",
+    "static/js/2.13f2c532.chunk.js.map": "/keeb-store/static/js/2.13f2c532.chunk.js.map",
+    "index.html": "/keeb-store/index.html",
+    "static/css/main.28b02948.chunk.css.map": "/keeb-store/static/css/main.28b02948.chunk.css.map",
+    "static/js/2.13f2c532.chunk.js.LICENSE.txt": "/keeb-store/static/js/2.13f2c532.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9888f713.js",
+    "static/js/2.13f2c532.chunk.js",
+    "static/css/main.28b02948.chunk.css",
+    "static/js/main.87954fbf.chunk.js"
+  ]
 }
